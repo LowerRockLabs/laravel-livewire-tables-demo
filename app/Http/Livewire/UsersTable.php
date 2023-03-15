@@ -24,6 +24,8 @@ class UsersTable extends DataTableComponent
 {
     public $myParam = 'Default';
 
+    public $filterDisplayMethod = 'popover';
+
     public string $tableName = 'users1';
 
     public array $users1 = [];
@@ -61,11 +63,18 @@ class UsersTable extends DataTableComponent
             })
             ->setHideBulkActionsWhenEmptyEnabled()
             ->setTableRowUrl(function ($row) {
-                return 'https://google-'.$row->id.'.com';
+                return 'https://www.google.com/search?q='.$row->id;
             })
             ->setTableRowUrlTarget(function ($row) {
                 return '_blank';
             });
+        if ($this->filterDisplayMethod == 'slide-down') {
+            $this->setFilterLayoutSlideDown();
+        }
+
+        if ($this->filterDisplayMethod == 'popover') {
+            $this->setFilterLayoutPopover();
+        }
     }
 
     public function columns(): array

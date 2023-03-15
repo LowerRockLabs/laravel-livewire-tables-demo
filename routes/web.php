@@ -17,14 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/bootstrap-4', function () {
-    return view('bs4');
+Route::get('/tailwind/{filterDisplayMethod?}', function ($filterDisplayMethod = 'popover') {
+    return view('tw', ['filterDisplayMethod' => $filterDisplayMethod]);
+})->name('tw');
+
+Route::get('/bootstrap-4/{filterDisplayMethod?}', function ($filterDisplayMethod = 'popover') {
+    return view('bs4', ['filterDisplayMethod' => $filterDisplayMethod]);
 })->name('bs4');
 
-Route::get('/bootstrap-5', function () {
-    return view('bs5');
+Route::get('/bootstrap-5/{filterDisplayMethod?}', function ($filterDisplayMethod = 'popover') {
+    return view('bs5', ['filterDisplayMethod' => $filterDisplayMethod]);
 })->name('bs5');
-
-Route::get('/tailwind', function () {
-    return view('tw');
-})->name('tw');
