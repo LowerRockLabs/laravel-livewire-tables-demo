@@ -1,0 +1,825 @@
+ParaTest v7.1.2 upon PHPUnit 10.0.18 by Sebastian Bergmann and contributors.
+
+Processes:     12
+Runtime:       PHP 8.2.4
+Configuration: /var/www/html/phpunit.xml
+
+...............................................................  63 / 380 ( 16%)
+............................................................... 126 / 380 ( 33%)
+......................F........................................ 189 / 380 ( 49%)
+............................................................... 252 / 380 ( 66%)
+............................................................... 315 / 380 ( 82%)
+.........F.............R....................................... 378 / 380 ( 99%)
+..                                                              380 / 380 (100%)
+
+Time: 00:05.891, Memory: 16.00 MB
+
+There were 2 failures:
+
+1) Rappasoft\LaravelLivewireTables\Tests\Traits\Visuals\PaginationVisualsTest::per_page_shows_by_default
+Failed asserting that '<div    id="datatable-zCIxL63b1ImXEMEwbkEO"\n
+\n
+    \n
+    >\n
+     <div>\n
+    </div>\n
+     <div wire:offline.class.remove="hidden" class="hidden">\n
+            <div class="rounded-md bg-red-100 p-4 mb-4 dark:border-red-800 dark:bg-red-500">\n
+                <div class="flex">\n
+                    <div class="flex-shrink-0">\n
+                        <svg class="h-5 w-5 text-red-400 dark:text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">\n
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />\n
+                        </svg>\n
+                    </div>\n
+                    <div class="ml-3">\n
+                        <h3 class="text-sm font-medium text-red-800 dark:text-white">\n
+                            You are not connected to the internet.                        </h3>\n
+                    </div>\n
+                </div>\n
+            </div>\n
+        </div>\n
+    \n
+     <div class="flex-col">\n
+        <div>\n
+            </div>\n
+        <div>\n
+            </div>\n
+        <div class="md:flex md:justify-between mb-4 px-4 md:p-0">\n
+        <div class="w-full mb-4 md:mb-0 md:w-2/4 md:flex space-y-4 md:space-y-0 md:space-x-2">\n
+            \n
+            \n
+                            <div class="flex rounded-md shadow-sm">\n
+                    <input\n
+                        wire:model="table.search"\n
+                        placeholder="Search"\n
+                        type="text"\n
+                        class="block w-full border-gray-300 rounded-md shadow-sm transition duration-150 ease-in-out sm:text-sm sm:leading-5 dark:bg-gray-700 dark:text-white dark:border-gray-600  focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md "\n
+                    />\n
+\n
+                                    </div>\n
+            \n
+                            <div\n
+                                            x-data="{ open: false }"\n
+                        x-on:keydown.escape.stop="open = false"\n
+                        x-on:mousedown.away="open = false"\n
+                    \n
+                    class="relative block md:inline-block text-left"\n
+                >\n
+                    <div>\n
+                        <button\n
+                            type="button"\n
+                            class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600"\n
+\n
+                                                            x-on:click="open = !open"\n
+                                aria-haspopup="true"\n
+                                x-bind:aria-expanded="open"\n
+                                aria-expanded="true"\n
+                            \n
+                                                    >\n
+                            Filters\n
+                            \n
+                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"\n
+                                viewBox="0 0 24 24" stroke="currentColor">\n
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"\n
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />\n
+                            </svg>\n
+                        </button>\n
+                    </div>\n
+\n
+                                            <div\n
+                            x-cloak\n
+                            x-show="open"\n
+                            x-transition:enter="transition ease-out duration-100"\n
+                            x-transition:enter-start="transform opacity-0 scale-95"\n
+                            x-transition:enter-end="transform opacity-100 scale-100"\n
+                            x-transition:leave="transition ease-in duration-75"\n
+                            x-transition:leave-start="transform opacity-100 scale-100"\n
+                            x-transition:leave-end="transform opacity-0 scale-95"\n
+                            class="origin-top-left absolute left-0 mt-2 w-full md:w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-50 dark:bg-gray-700 dark:text-white dark:divide-gray-600"\n
+                            role="menu"\n
+                            aria-orientation="vertical"\n
+                            aria-labelledby="filters-menu"\n
+                        >\n
+                                                                                                <div class="py-1" role="none">\n
+                                        <div class="block px-4 py-2 text-sm text-gray-700 space-y-1" role="menuitem">\n
+                                            <label for="table-filter-breed"\n
+                                                class="block text-sm font-medium leading-5 text-gray-700 dark:text-white">\n
+                                                Breed\n
+                                            </label>\n
+\n
+                                            <div class="rounded-md">\n
+        <div>\n
+            <input\n
+                type="checkbox"\n
+                id="table-filter-breed-select-all"\n
+                wire:input="selectAllFilterOptions('breed')"\n
+                \n
+\n
+                class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+            >\n
+            <label for="table-filter-breed-select-all" class="dark:text-white">All</label>\n
+        </div>\n
+\n
+                    <div wire:key="table-filter-breed-multiselect-1">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-0"\n
+                    value="1"\n
+                    wire:key="table-filter-breed-0"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-0" class="dark:text-white">American Shorthair</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-200">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-1"\n
+                    value="200"\n
+                    wire:key="table-filter-breed-1"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-1" class="dark:text-white">Arabian</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-100">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-2"\n
+                    value="100"\n
+                    wire:key="table-filter-breed-2"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-2" class="dark:text-white">Beagle</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-201">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-3"\n
+                    value="201"\n
+                    wire:key="table-filter-breed-3"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-3" class="dark:text-white">Clydesdale</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-101">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-4"\n
+                    value="101"\n
+                    wire:key="table-filter-breed-4"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-4" class="dark:text-white">Corgi</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-2">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-5"\n
+                    value="2"\n
+                    wire:key="table-filter-breed-5"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-5" class="dark:text-white">Maine Coon</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-202">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-6"\n
+                    value="202"\n
+                    wire:key="table-filter-breed-6"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-6" class="dark:text-white">Mustang</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-4">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-7"\n
+                    value="4"\n
+                    wire:key="table-filter-breed-7"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-7" class="dark:text-white">Norwegian Forest</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-3">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-8"\n
+                    value="3"\n
+                    wire:key="table-filter-breed-8"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-8" class="dark:text-white">Persian</label>\n
+            </div>\n
+                    <div wire:key="table-filter-breed-multiselect-102">\n
+                <input\n
+                    type="checkbox"\n
+                    id="table-filter-breed-9"\n
+                    value="102"\n
+                    wire:key="table-filter-breed-9"\n
+                    wire:model.stop="table.filters.breed"\n
+                    \n
+                    :class="{'disabled:bg-gray-400 disabled:hover:bg-gray-400' : false}"\n
+                    class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                >\n
+                <label for="table-filter-breed-9" class="dark:text-white">Red Setter</label>\n
+            </div>\n
+            </div>\n
+\n
+                                        </div>\n
+                                    </div>\n
+                                                                                                                                <div class="py-1" role="none">\n
+                                        <div class="block px-4 py-2 text-sm text-gray-700 space-y-1" role="menuitem">\n
+                                            <label for="table-filter-species"\n
+                                                class="block text-sm font-medium leading-5 text-gray-700 dark:text-white">\n
+                                                Species\n
+                                            </label>\n
+\n
+                                            <div class="rounded-md shadow-sm">\n
+        <select multiple\n
+            wire:model.stop="table.filters.species"\n
+            wire:key="table-filter-species"\n
+            id="table-filter-species"\n
+            class="block w-full transition duration-150 ease-in-out border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-800 dark:text-white dark:border-gray-600"\n
+        >\n
+                                                        <option value="4">Bird</option>\n
+                                                                <option value="1">Cat</option>\n
+                                                                <option value="2">Dog</option>\n
+                                                                <option value="3">Horse</option>\n
+                                    </select>\n
+    </div>\n
+\n
+                                        </div>\n
+                                    </div>\n
+                                                            \n
+                                                    </div>\n
+                                    </div>\n
+            \n
+                    </div>\n
+\n
+        <div class="md:flex md:items-center space-y-4 md:space-y-0 md:space-x-2">\n
+            \n
+            \n
+                            <div class=" mb-4 w-full md:w-auto md:mb-0 md:ml-2">\n
+                    <div\n
+                        x-data="{ open: false }"\n
+                        @keydown.window.escape="open = false"\n
+                        x-on:click.away="open = false"\n
+                        class="inline-block relative w-full text-left md:w-auto"\n
+                        wire:key="column-select-button-table"\n
+                    >\n
+                        <div>\n
+                            <span class="rounded-md shadow-sm">\n
+                                <button\n
+                                    x-on:click="open = !open"\n
+                                    type="button"\n
+                                    class="inline-flex justify-center px-4 py-2 w-full text-sm font-medium text-gray-700 bg-white rounded-md border border-gray-300 shadow-sm hover:bg-gray-50 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600"\n
+                                    aria-haspopup="true"\n
+                                    x-bind:aria-expanded="open"\n
+                                    aria-expanded="true"\n
+                                >\n
+                                    Columns\n
+                                    <svg class="-mr-1 ml-2 w-5 h-5" x-description="Heroicon name: chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">\n
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path>\n
+                                    </svg>\n
+                                </button>\n
+                            </span>\n
+                        </div>\n
+\n
+                        <div\n
+                            x-cloak\n
+                            x-show="open"\n
+                            x-transition:enter="transition ease-out duration-100"\n
+                            x-transition:enter-start="transform opacity-0 scale-95"\n
+                            x-transition:enter-end="transform opacity-100 scale-100"\n
+                            x-transition:leave="transition ease-in duration-75"\n
+                            x-transition:leave-start="transform opacity-100 scale-100"\n
+                            x-transition:leave-end="transform opacity-0 scale-95"\n
+                            class="absolute right-0 z-50 mt-2 w-full bg-white rounded-md divide-y divide-gray-100 ring-1 ring-black ring-opacity-5 shadow-lg origin-top-right md:w-48 focus:outline-none"\n
+                        >\n
+                            <div class="bg-white rounded-md shadow-xs dark:bg-gray-700 dark:text-white">\n
+                                <div class="p-2" role="menu" aria-orientation="vertical" aria-labelledby="column-select-menu">\n
+                                    <div>\n
+                                        <label\n
+                                            wire:loading.attr="disabled"\n
+                                            class="inline-flex items-center px-2 py-1 disabled:opacity-50 disabled:cursor-wait"\n
+                                        >\n
+                                            <input\n
+                                                class="text-indigo-600 transition duration-150 ease-in-out border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                                                                                                    checked\n
+                                                    wire:click="deselectAllColumns"\n
+                                                                                                wire:loading.attr="disabled"\n
+                                                type="checkbox"\n
+                                            />\n
+                                            <span class="ml-2">All Columns</span>\n
+                                        </label>\n
+                                    </div>\n
+                                                                                                                        <div wire:key="columnSelect-0-table">\n
+                                                <label\n
+                                                    wire:loading.attr="disabled"\n
+                                                    wire:target="selectedColumns"\n
+                                                    class="inline-flex items-center px-2 py-1 disabled:opacity-50 disabled:cursor-wait"\n
+                                                >\n
+                                                    <input\n
+                                                        class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                                                        wire:model="selectedColumns"\n
+                                                        wire:target="selectedColumns"\n
+                                                        wire:loading.attr="disabled"\n
+                                                        type="checkbox"\n
+                                                        value="id"\n
+                                                    />\n
+                                                    <span class="ml-2">ID</span>\n
+                                                </label>\n
+                                            </div>\n
+                                                                                                                                                                                                                                            <div wire:key="columnSelect-2-table">\n
+                                                <label\n
+                                                    wire:loading.attr="disabled"\n
+                                                    wire:target="selectedColumns"\n
+                                                    class="inline-flex items-center px-2 py-1 disabled:opacity-50 disabled:cursor-wait"\n
+                                                >\n
+                                                    <input\n
+                                                        class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                                                        wire:model="selectedColumns"\n
+                                                        wire:target="selectedColumns"\n
+                                                        wire:loading.attr="disabled"\n
+                                                        type="checkbox"\n
+                                                        value="name"\n
+                                                    />\n
+                                                    <span class="ml-2">Name</span>\n
+                                                </label>\n
+                                            </div>\n
+                                                                                                                                                                <div wire:key="columnSelect-3-table">\n
+                                                <label\n
+                                                    wire:loading.attr="disabled"\n
+                                                    wire:target="selectedColumns"\n
+                                                    class="inline-flex items-center px-2 py-1 disabled:opacity-50 disabled:cursor-wait"\n
+                                                >\n
+                                                    <input\n
+                                                        class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                                                        wire:model="selectedColumns"\n
+                                                        wire:target="selectedColumns"\n
+                                                        wire:loading.attr="disabled"\n
+                                                        type="checkbox"\n
+                                                        value="age"\n
+                                                    />\n
+                                                    <span class="ml-2">Age</span>\n
+                                                </label>\n
+                                            </div>\n
+                                                                                                                                                                <div wire:key="columnSelect-4-table">\n
+                                                <label\n
+                                                    wire:loading.attr="disabled"\n
+                                                    wire:target="selectedColumns"\n
+                                                    class="inline-flex items-center px-2 py-1 disabled:opacity-50 disabled:cursor-wait"\n
+                                                >\n
+                                                    <input\n
+                                                        class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                                                        wire:model="selectedColumns"\n
+                                                        wire:target="selectedColumns"\n
+                                                        wire:loading.attr="disabled"\n
+                                                        type="checkbox"\n
+                                                        value="breed"\n
+                                                    />\n
+                                                    <span class="ml-2">Breed</span>\n
+                                                </label>\n
+                                            </div>\n
+                                                                                                                                                                <div wire:key="columnSelect-5-table">\n
+                                                <label\n
+                                                    wire:loading.attr="disabled"\n
+                                                    wire:target="selectedColumns"\n
+                                                    class="inline-flex items-center px-2 py-1 disabled:opacity-50 disabled:cursor-wait"\n
+                                                >\n
+                                                    <input\n
+                                                        class="text-indigo-600 rounded border-gray-300 shadow-sm transition duration-150 ease-in-out focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-600 dark:focus:bg-gray-600 disabled:opacity-50 disabled:cursor-wait"\n
+                                                        wire:model="selectedColumns"\n
+                                                        wire:target="selectedColumns"\n
+                                                        wire:loading.attr="disabled"\n
+                                                        type="checkbox"\n
+                                                        value="other"\n
+                                                    />\n
+                                                    <span class="ml-2">Other</span>\n
+                                                </label>\n
+                                            </div>\n
+                                                                                                            </div>\n
+                            </div>\n
+                        </div>\n
+                    </div>\n
+                </div>\n
+            \n
+                            <div>\n
+                    <select\n
+                        wire:model="perPage"\n
+                        id="perPage"\n
+                        class="block w-full border-gray-300 rounded-md shadow-sm transition duration-150 ease-in-out sm:text-sm sm:leading-5 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white dark:border-gray-600"\n
+                    >\n
+                                                    <option value="10" wire:key="per-page-10-table">10</option>\n
+                                                    <option value="25" wire:key="per-page-25-table">25</option>\n
+                                                    <option value="50" wire:key="per-page-50-table">50</option>\n
+                                            </select>\n
+                </div>\n
+            \n
+                    </div>\n
+    </div>\n
+    </div>\n
+\n
+    <div class="shadow overflow-y-scroll border-b border-gray-200 dark:border-gray-700 sm:rounded-lg">\n
+        <table class="min-w-full divide-y divide-gray-200 dark:divide-none">\n
+            <thead class="bg-gray-50">\n
+                <tr>\n
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium whitespace-nowrap text-gray-500 uppercase tracking-wider dark:bg-gray-800 dark:text-gray-400" wire:key="header-col-0-zCIxL63b1ImXEMEwbkEO">\n
+                    <button\n
+                wire:click="sortBy('id')"\n
+                class="flex items-center space-x-1 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider group focus:outline-none dark:text-gray-400"\n
+            >\n
+                <span>ID</span>\n
+\n
+                <span class="relative flex items-center">\n
+                                            <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">\n
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>\n
+                        </svg>\n
+                                    </span>\n
+            </button>\n
+            </th>\n
+                                                            \n
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium whitespace-nowrap text-gray-500 uppercase tracking-wider dark:bg-gray-800 dark:text-gray-400" wire:key="header-col-1-zCIxL63b1ImXEMEwbkEO">\n
+                    <button\n
+                wire:click="sortBy('sort')"\n
+                class="flex items-center space-x-1 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider group focus:outline-none dark:text-gray-400"\n
+            >\n
+                <span>Sort</span>\n
+\n
+                <span class="relative flex items-center">\n
+                                            <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">\n
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>\n
+                        </svg>\n
+                                    </span>\n
+            </button>\n
+            </th>\n
+                                                            \n
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium whitespace-nowrap text-gray-500 uppercase tracking-wider dark:bg-gray-800 dark:text-gray-400" wire:key="header-col-2-zCIxL63b1ImXEMEwbkEO">\n
+                    <button\n
+                wire:click="sortBy('name')"\n
+                class="flex items-center space-x-1 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider group focus:outline-none dark:text-gray-400"\n
+            >\n
+                <span>Name</span>\n
+\n
+                <span class="relative flex items-center">\n
+                                            <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">\n
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>\n
+                        </svg>\n
+                                    </span>\n
+            </button>\n
+            </th>\n
+                                                            \n
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium whitespace-nowrap text-gray-500 uppercase tracking-wider dark:bg-gray-800 dark:text-gray-400" wire:key="header-col-3-zCIxL63b1ImXEMEwbkEO">\n
+                    Age\n
+            </th>\n
+                                                            \n
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium whitespace-nowrap text-gray-500 uppercase tracking-wider dark:bg-gray-800 dark:text-gray-400" wire:key="header-col-4-zCIxL63b1ImXEMEwbkEO">\n
+                    <button\n
+                wire:click="sortBy('breed.name')"\n
+                class="flex items-center space-x-1 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider group focus:outline-none dark:text-gray-400"\n
+            >\n
+                <span>Breed</span>\n
+\n
+                <span class="relative flex items-center">\n
+                                            <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">\n
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>\n
+                        </svg>\n
+                                    </span>\n
+            </button>\n
+            </th>\n
+                                                            \n
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium whitespace-nowrap text-gray-500 uppercase tracking-wider dark:bg-gray-800 dark:text-gray-400" wire:key="header-col-5-zCIxL63b1ImXEMEwbkEO">\n
+                    Other\n
+            </th>\n
+                </tr>\n
+            </thead>\n
+            <tbody\n
+                \n
+                class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-none"\n
+            >\n
+                <tr\n
+        wire:loading.class.delay="opacity-50 dark:bg-gray-900 dark:opacity-60"\n
+\n
+        \n
+        class="bg-white dark:bg-gray-700 dark:text-white" wire:key="row-0-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-0-0-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        1\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-0-1-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        0\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-0-2-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Cartman\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-0-3-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        22\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-0-4-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Norwegian Forest\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-0-5-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Other\n
+    </td>\n
+    </tr>\n
+\n
+                                <tr\n
+        wire:loading.class.delay="opacity-50 dark:bg-gray-900 dark:opacity-60"\n
+\n
+        \n
+        class="bg-gray-50 dark:bg-gray-800 dark:text-white" wire:key="row-1-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-1-0-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        2\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-1-1-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        0\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-1-2-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Tux\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-1-3-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        8\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-1-4-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Norwegian Forest\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-1-5-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Other\n
+    </td>\n
+    </tr>\n
+\n
+                                <tr\n
+        wire:loading.class.delay="opacity-50 dark:bg-gray-900 dark:opacity-60"\n
+\n
+        \n
+        class="bg-white dark:bg-gray-700 dark:text-white" wire:key="row-2-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-2-0-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        3\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-2-1-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        0\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-2-2-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        May\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-2-3-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        2\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-2-4-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Red Setter\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-2-5-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Other\n
+    </td>\n
+    </tr>\n
+\n
+                                <tr\n
+        wire:loading.class.delay="opacity-50 dark:bg-gray-900 dark:opacity-60"\n
+\n
+        \n
+        class="bg-gray-50 dark:bg-gray-800 dark:text-white" wire:key="row-3-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-3-0-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        4\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-3-1-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        0\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-3-2-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Ben\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-3-3-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        5\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-3-4-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Arabian\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-3-5-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Other\n
+    </td>\n
+    </tr>\n
+\n
+                                <tr\n
+        wire:loading.class.delay="opacity-50 dark:bg-gray-900 dark:opacity-60"\n
+\n
+        \n
+        class="bg-white dark:bg-gray-700 dark:text-white" wire:key="row-4-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-4-0-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        5\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-4-1-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        0\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-4-2-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Chico\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-4-3-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        7\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-4-4-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Mustang\n
+    </td>\n
+                                                                            \n
+                    <td\n
+        \n
+        class="px-6 py-4 whitespace-nowrap text-sm font-medium dark:text-white" wire:key="cell-4-5-zCIxL63b1ImXEMEwbkEO"\n
+    >\n
+        Other\n
+    </td>\n
+    </tr>\n
+            </tbody>\n
+\n
+                    </table>\n
+    </div>\n
+\n
+    <div>\n
+                    <div class="mt-4 px-4 md:p-0 sm:flex justify-between items-center space-y-4 sm:space-y-0">\n
+                <div>\n
+                                            <p class="total-pagination-results text-sm text-gray-700 leading-5 dark:text-white">\n
+                            Showing                            <span class="font-medium">5</span>\n
+                            results                        </p>\n
+                                    </div>\n
+\n
+                                    <div>\n
+    </div>\n
+\n
+                            </div>\n
+            </div>\n
+</div>\n
+\n
+' contains "<select
+                        wire:model="perPage"".
+
+/var/www/html/vendor/livewire/livewire/src/Testing/Concerns/MakesAssertions.php:93
+/var/www/VisibleRowIDs/tests/Traits/Visuals/PaginationVisualsTest.php:25
+/var/www/html/vendor/orchestra/testbench-core/src/TestCase.php:96
+
+2) Rappasoft\LaravelLivewireTables\Tests\Traits\Helpers\ComponentHelpersTest::can_get_visible_row_ids
+Failed asserting that two arrays are identical.
+--- Expected
++++ Actual
+@@ @@
+-Array &0 ()
++Array &0 (
++    0 => 1
++    1 => 2
++    2 => 3
++    3 => 4
++    4 => 5
++)
+
+/var/www/VisibleRowIDs/tests/Traits/Helpers/ComponentHelpersTest.php:239
+/var/www/html/vendor/orchestra/testbench-core/src/TestCase.php:96
+
+--
+
+There was 1 risky test:
+
+1) Rappasoft\LaravelLivewireTables\Tests\Traits\Visuals\SortingVisualsTest::th_headers_are_buttons_with_sorting_enabled
+This test did not perform any assertions
+
+/var/www/VisibleRowIDs/tests/Traits/Visuals/SortingVisualsTest.php:12
+
+FAILURES!
+Tests: 380, Assertions: 925, Failures: 2, Risky: 1.

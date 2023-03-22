@@ -16,14 +16,23 @@
         "rappasoft/laravel-livewire-tables": "dev-VisibleRowIDs"
     },
     "require-dev": {
+        "ext-sqlite3": "*",
         "barryvdh/laravel-debugbar": "^3.6",
-        "spatie/laravel-ignition": "^2.0",
+        "brianium/paratest": "^7.1",
         "fakerphp/faker": "^1.9.1",
-        "laravel/sail": "^1.0.1",
+        "laravel/dusk": "^7.7",
+        "laravel/pint": "^1.6",
+        "laravel/sail": "^1.21",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^7.0",
+        "nunomaduro/larastan": "^2.2",
+        "orchestra/testbench": "^6.13|^7.0|^8.0",
+        "pcov/clobber": "^2.0",
+        "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.0",
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "spatie/laravel-ignition": "^2.0",
+        "spatie/laravel-ray": "^1.9"
     },
     "autoload": {
         "psr-4": {
@@ -34,7 +43,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Rappasoft\\LaravelLivewireTables\\Tests\\": "./vendor/rappasoft/VisibleRowIDs/tests/"
         }
     },
     "scripts": {
@@ -63,6 +72,39 @@
         "reset": [
             "composer clear-all",
             "composer cache-all"
+        ],
+        "run-paratest": [
+            "@php -d pcov.enabled=1 vendor/bin/paratest "
+        ],
+        "initial-setup": [
+            "composer update",
+            "touch database/database.sqlite",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate:fresh --seed",
+            "npm update",
+            "npm i alpinejs",
+            "npm i @alpinejs/focus",
+            "npm i @nextapps-be/livewire-sortablejs",
+            "npm i @fontsource/inter",
+            "npm update",
+            "npm run production",
+            "@php artisan view:clear",
+            "@php artisan clear-compiled",
+            "@php artisan cache:clear",
+            "@php artisan route:clear",
+            "@php artisan view:clear",
+            "@php artisan config:clear",
+            "@php artisan config:cache",
+            "@php artisan route:cache",
+            "chown -R www-data:www-data ."
+        ],
+        "npm-reset": [
+            "composer update",
+            "npm update",
+            "npm run production",
+            "php artisan view:clear",
+            "chown -R www-data:www-data ."
         ],
         "pint": "./vendor/bin/pint"
     },
