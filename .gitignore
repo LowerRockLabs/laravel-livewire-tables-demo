@@ -15,3 +15,6 @@ yarn-error.log
 /.vscode
 composer.json.local
 composerCfg/*
+paratest.txt
+.phpunit.cache/code-coverage/*
+build/*

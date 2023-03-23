@@ -13,7 +13,8 @@
         "laravel/framework": "^10.0",
         "laravel/pint": "^1.6",
         "maatwebsite/excel": "^3.1",
-        "rappasoft/laravel-livewire-tables": "dev-VisibleRowIDs"
+        "livewire/livewire": "^2.12",
+        "spatie/laravel-package-tools": "^1.14"
     },
     "require-dev": {
         "ext-sqlite3": "*",
@@ -38,7 +39,8 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Database\\Seeders\\": "database/seeders/",
+            "Rappasoft\\LaravelLivewireTables\\": "./vendor/rappasoft/VisibleRowIDs/src"
         }
     },
     "autoload-dev": {
@@ -74,7 +76,7 @@
             "composer cache-all"
         ],
         "run-paratest": [
-            "@php -d pcov.enabled=1 vendor/bin/paratest "
+            "@php -d pcov.enabled=1 vendor/bin/paratest --passthru-php=\"'-d pcov.enabled=1' '-d pcov.directory=./vendor/rappasoft/VisibleRowIDs/src/'\""
         ],
         "initial-setup": [
             "composer update",
