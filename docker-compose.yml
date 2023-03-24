@@ -19,7 +19,7 @@ services:
       XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
     volumes:
       - '.:/var/www/html'
-      - '../VisibleRowIDs:/var/www/VisibleRowIDs'
+      - '../MissingTests:/var/www/html/vendor/rappasoft/laravel-livewire-tables'
       - './composerCfg:/root/.config/composer/'
     networks:
       - sail

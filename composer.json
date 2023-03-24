@@ -40,12 +40,12 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Rappasoft\\LaravelLivewireTables\\": "./vendor/rappasoft/VisibleRowIDs/src"
+            "Rappasoft\\LaravelLivewireTables\\": "vendor/rappasoft/laravel-livewire-tables/src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Rappasoft\\LaravelLivewireTables\\Tests\\": "./vendor/rappasoft/VisibleRowIDs/tests/"
+            "Rappasoft\\LaravelLivewireTables\\Tests\\": "vendor/rappasoft/laravel-livewire-tables/tests/"
         }
     },
     "scripts": {
@@ -76,7 +76,7 @@
             "composer cache-all"
         ],
         "run-paratest": [
-            "@php -d pcov.enabled=1 vendor/bin/paratest --passthru-php=\"'-d pcov.enabled=1' '-d pcov.directory=./vendor/rappasoft/VisibleRowIDs/src/'\""
+            "@php -d pcov.enabled=1 vendor/bin/paratest --passthru-php=\"'-d pcov.enabled=1' '-d pcov.directory=vendor/rappasoft/laravel-livewire-tables/src/'\""
         ],
         "initial-setup": [
             "composer update",
