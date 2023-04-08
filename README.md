@@ -12,3 +12,5 @@ Installation:
 
 // To seed the tables with realistic (but fake) data
 - php artisan db:seed
+
+### Enjoying this project? [Buy me a beer 🍺](https://www.buymeacoffee.com/rappasoft)
