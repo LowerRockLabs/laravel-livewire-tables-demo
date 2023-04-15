@@ -22,7 +22,7 @@ Route::get('/tailwind', function () {
 })->name('tw');
 
 Route::get('/tailwind-slidedown', function () {
-    return view('tw-slidedown');
+    return view('tw', ['displayStyle' => 'slide-down']);
 })->name('tw-slidedown');
 
 Route::get('/tailwind3', function () {
@@ -30,7 +30,7 @@ Route::get('/tailwind3', function () {
 })->name('tw3');
 
 Route::get('/tailwind3-slidedown', function () {
-    return view('tw3-slidedown');
+    return view('tw3', ['displayStyle' => 'slide-down']);
 })->name('tw3-slidedown');
 
 Route::get('/bootstrap-4', function () {
@@ -38,7 +38,7 @@ Route::get('/bootstrap-4', function () {
 })->name('bs4');
 
 Route::get('/bootstrap-4-slidedown', function () {
-    return view('bs4-slidedown');
+    return view('bs4', ['displayStyle' => 'slide-down']);
 })->name('bs4-slidedown');
 
 Route::get('/bootstrap-5', function () {
@@ -46,5 +46,5 @@ Route::get('/bootstrap-5', function () {
 })->name('bs5');
 
 Route::get('/bootstrap-5-slidedown', function () {
-    return view('bs5-slidedown');
+    return view('bs5', ['displayStyle' => 'slide-down']);
 })->name('bs5-slidedown');

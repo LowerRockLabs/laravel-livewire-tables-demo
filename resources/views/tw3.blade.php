@@ -1,3 +1,4 @@
+@props(['displayStyle' => 'popover'])
 <!DOCTYPE html>
 <html lang="en" x-cloak x-data="{ darkMode: localStorage.getItem('darkTw3') === 'true' }" x-init="$watch('darkMode', val => localStorage.setItem('darkTw3', val))" x-bind:class="{ 'dark': darkMode }">
 
@@ -1120,7 +1121,7 @@
 </head>
 
 <body class="dark:bg-gray-900 dark:text-white">
-@include('includes.buttons', ['displayStyle' => 'popover'])
+@include('includes.buttons', ['displayStyle' => $displayStyle ])
 
     <div class="px-3 py-3 pt-5 pb-6 mx-auto text-center">
         <div
@@ -1154,7 +1155,7 @@
             <livewire:other-component />
         </div>
         <div>
-            <livewire:users-table myParam="Test" />
+            <livewire:users-table myParam="Test" filterLayout="{{ $displayStyle }}"/>
         </div>
     </div>
 
