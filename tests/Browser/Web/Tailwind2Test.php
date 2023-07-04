@@ -10,7 +10,7 @@ class Tailwind2Test extends DuskTestCase
     /**
      * All Filters Load
      */
-    public function testFilterMenuOpensAll(): void
+    public function testCorrectThemeDisplays(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/tailwind');

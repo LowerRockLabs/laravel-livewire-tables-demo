@@ -10,10 +10,10 @@ class Bootstrap4Test extends DuskTestCase
     /**
      * All Filters Load
      */
-    public function testFilterMenuOpensAll(): void
+    public function testCorrectThemeDisplays(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/bootstrap4');
+            $browser->visit('/bootstrap-4');
             $browser->assertSee('Bootstrap 4 Implementation');
             $browser->assertDontSee('Tailwind 2 Implementation');
             $browser->assertDontSee('Tailwind 3 Implementation');
