@@ -48,7 +48,6 @@ class UsersTable extends DataTableComponent
         //$this->userExample
         //(Tag::inRandomOrder()->take(rand(1,3))->get()->toArray());
         $this->setPrimaryKey('id')
-            ->setDebugEnabled()
             ->setAdditionalSelects(['users.id as id', 'users.rule'])
             ->setFilterLayout($this->filterLayout)
             ->setConfigurableAreas([
