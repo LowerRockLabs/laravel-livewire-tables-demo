@@ -39,4 +39,43 @@ class Tailwind3Test extends DuskTestCase
         });
     }
 
+    /**
+     * @group sorting
+     */
+    public function testSortViaClicks(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/tailwind3');
+            $browser->assertSee('Jayde Feil');
+            //$browser->screenshot('TW3-Before-Sort');
+
+            $browser->click('div > div.shadow.overflow-y-scroll.border-b.border-gray-200.dark\:border-gray-700.sm\:rounded-lg > table > thead > tr > th:nth-child(4) > button')->pause(1000);
+            //$browser->screenshot('TW3-After-Asc-Sort');
+            $browser->assertSee("Aditya D'Amore");
+
+            $browser->click('div > div.shadow.overflow-y-scroll.border-b.border-gray-200.dark\:border-gray-700.sm\:rounded-lg > table > thead > tr > th:nth-child(4) > button')->pause(1000);
+           // $browser->screenshot('TW3-After-Desc-Sort');
+            $browser->assertSee("Zachariah Kreiger");
+
+        });
+    }
+
+    /**
+     * @group sorting
+     */
+    public function testSortViaQueryString(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/tailwind3');
+            $browser->assertSee('Jayde Feil');
+
+            $browser->visit('/tailwind3?users2[sorts][name]=asc');
+            $browser->assertSee("Aditya D'Amore");
+
+            $browser->visit('/tailwind3?users2[sorts][name]=desc');
+            $browser->assertSee("Zachariah Kreiger");
+
+        });
+    }
+
 }
