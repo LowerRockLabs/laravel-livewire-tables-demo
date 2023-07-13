@@ -38,4 +38,79 @@ class Tailwind2Test extends DuskTestCase
 
         });
     }
+
+
+    /**
+     * @group sorting
+     */
+    public function testSortViaClick(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/tailwind');
+            $browser->assertSee('Jayde Feil');
+            
+            $browser->click('div > div.shadow.overflow-y-scroll.border-b.border-gray-200.dark\:border-gray-700.sm\:rounded-lg > table > thead > tr > th:nth-child(4) > button')->pause(1000);
+            $browser->assertSee("Aditya D'Amore");
+
+            $browser->click('div > div.shadow.overflow-y-scroll.border-b.border-gray-200.dark\:border-gray-700.sm\:rounded-lg > table > thead > tr > th:nth-child(4) > button')->pause(1000);
+            $browser->assertSee("Zachariah Kreiger");
+
+        });
+    }
+
+    /**
+     * @group sorting
+     */
+    public function testSortViaQueryString(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/tailwind');
+            $browser->assertSee('Jayde Feil');
+
+            $browser->visit('/tailwind?users2[sorts][name]=asc');
+            $browser->assertSee("Aditya D'Amore");
+
+            $browser->visit('/tailwind?users2[sorts][name]=desc');
+            $browser->assertSee("Zachariah Kreiger");
+
+        });
+    }
+
+    /**
+     * @group sorting
+     */
+    public function testSortingPillsDisplayViaClick(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/tailwind');
+            $browser->assertDontSee('Applied Sorting');
+
+            $browser->click('div > div.shadow.overflow-y-scroll.border-b.border-gray-200.dark\:border-gray-700.sm\:rounded-lg > table > thead > tr > th:nth-child(4) > button')->pause(1000);
+            $browser->assertSee('Applied Sorting');
+            $browser->assertSee('Name: A-Z');
+
+            $browser->click('div > div.shadow.overflow-y-scroll.border-b.border-gray-200.dark\:border-gray-700.sm\:rounded-lg > table > thead > tr > th:nth-child(4) > button')->pause(1000);
+            $browser->assertSee('Applied Sorting');
+            $browser->assertSee('Name: Z-A');
+        });
+    }
+
+    /**
+     * @group sorting
+     */
+    public function testSortingPillsDisplayViaQueryString(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/tailwind');
+            $browser->assertDontSee('Applied Sorting');
+
+            $browser->visit('/tailwind?users2[sorts][name]=asc');
+            $browser->assertSee('Applied Sorting');
+            $browser->assertSee('Name: A-Z');
+
+            $browser->visit('/tailwind?users2[sorts][name]=desc');
+            $browser->assertSee('Applied Sorting');
+            $browser->assertSee('Name: Z-A');
+        });
+    }
 }

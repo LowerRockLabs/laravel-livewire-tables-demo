@@ -32,10 +32,85 @@ class Bootstrap4Test extends DuskTestCase
             $browser->assertSee('Bootstrap 4 Implementation');
             $browser->screenshot('BS4-Before-Click');
             $browser->assertDontSee('Verified To');
-            $browser->click('div.d-flex.flex-column > div.d-md-flex.justify-content-between.mb-3 > div:nth-child(1) > div.ml-0.ml-md-2.mb-3.mb-md-0 > div > div > button')->pause(1000);
+            $browser->click('div > div.table-responsive > table > thead > tr > th:nth-child(4) > div')->pause(1000);
             $browser->screenshot('BS4-After-Click');
             $browser->assertSee('Verified To');
 
+        });
+    }
+
+    
+    /**
+     * @group sorting
+     */
+    public function testSortViaClick(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/bootstrap-4');
+            $browser->assertSee('Jayde Feil');
+            
+            $browser->click('div > div.table-responsive > table > thead > tr > th:nth-child(4) > div')->pause(1000);
+            $browser->assertSee("Aditya D'Amore");
+
+            $browser->click('div > div.table-responsive > table > thead > tr > th:nth-child(4) > div')->pause(1000);
+            $browser->assertSee("Zachariah Kreiger");
+
+        });
+    }
+
+    /**
+     * @group sorting
+     */
+    public function testSortViaQueryString(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/bootstrap-4');
+            $browser->assertSee('Jayde Feil');
+
+            $browser->visit('/bootstrap-4?users2[sorts][name]=asc');
+            $browser->assertSee("Aditya D'Amore");
+
+            $browser->visit('/bootstrap-4?users2[sorts][name]=desc');
+            $browser->assertSee("Zachariah Kreiger");
+
+        });
+    }
+
+    /**
+     * @group sorting
+     */
+    public function testSortingPillsDisplayViaClick(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/bootstrap-4');
+            $browser->assertDontSee('Applied Sorting');
+
+            $browser->click('div > div.table-responsive > table > thead > tr > th:nth-child(4) > div')->pause(1000);
+            $browser->assertSee('Applied Sorting');
+            $browser->assertSee('Name: A-Z');
+
+            $browser->click('div > div.table-responsive > table > thead > tr > th:nth-child(4) > div')->pause(1000);
+            $browser->assertSee('Applied Sorting');
+            $browser->assertSee('Name: Z-A');
+        });
+    }
+
+    /**
+     * @group sorting
+     */
+    public function testSortingPillsDisplayViaQueryString(): void
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/bootstrap-4');
+            $browser->assertDontSee('Applied Sorting');
+
+            $browser->visit('/bootstrap-4?users2[sorts][name]=asc');
+            $browser->assertSee('Applied Sorting');
+            $browser->assertSee('Name: A-Z');
+
+            $browser->visit('/bootstrap-4?users2[sorts][name]=desc');
+            $browser->assertSee('Applied Sorting');
+            $browser->assertSee('Name: Z-A');
         });
     }
 }
