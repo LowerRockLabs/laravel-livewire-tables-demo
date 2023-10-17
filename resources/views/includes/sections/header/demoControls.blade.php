@@ -25,6 +25,9 @@
             <div style="margin: 1em">
                 @include('includes.sections.header.controls.localeSwitcher')
             </div>
+            <div style="margin: 1em">
+                @include('includes.sections.header.controls.paginationSwitcher')
+            </div>
 
         </div>
 

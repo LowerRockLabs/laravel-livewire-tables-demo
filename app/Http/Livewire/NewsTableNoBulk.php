@@ -18,26 +18,22 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\DemoTablesTrait;
 
 class NewsTableNoBulk extends DataTableComponent
 {
-    public $myParam = 'Default';
+    use DemoTablesTrait;
 
+    public $myParam = 'Default';
 
     public string $tableName = 'news';
 
     public array $news = [];
 
-    public string $filterLayout = 'popover';
-
     public array $fileList;
 
     public function configure(): void
     {
-        //$userExample->tags()->sync(Tag::inRandomOrder()->take(rand(1,3))->get()->pluck('tags.id')->toArray());
-
-        //$this->userExample
-        //(Tag::inRandomOrder()->take(rand(1,3))->get()->toArray());
         $this->setPrimaryKey('id')
             ->setDebugEnabled()
             ->setAdditionalSelects(['news.id as id'])

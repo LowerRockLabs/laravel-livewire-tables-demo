@@ -20,28 +20,22 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\DemoTablesTrait;
 
 class ArticleTable extends DataTableComponent
 {
-    public $myParam = 'Default123';
+    use DemoTablesTrait;
 
+    public $myParam = 'Default123';
 
     public string $tableName = 'articletable';
 
     public array $articletable = [];
 
-    public string $filterLayout = 'popover';
-
     public array $fileList;
 
     public function configure(): void
     {
-
-
-        //$userExample->tags()->sync(Tag::inRandomOrder()->take(rand(1,3))->get()->pluck('tags.id')->toArray());
-
-        //$this->userExample
-        //(Tag::inRandomOrder()->take(rand(1,3))->get()->toArray());
         $this->setPrimaryKey('id')
             ->setDebugEnabled()
             ->setAdditionalSelects(['articles.id as id'])

@@ -20,23 +20,14 @@ class NewsTable extends DataTableComponent
 
     public $myParam = 'Default123';
 
-
     public string $tableName = 'newstable';
 
     public array $newstable = [];
-
-    public string $filterLayout = 'popover';
 
     public array $fileList;
 
     public function configure(): void
     {
-
-
-        //$userExample->tags()->sync(Tag::inRandomOrder()->take(rand(1,3))->get()->pluck('tags.id')->toArray());
-
-        //$this->userExample
-        //(Tag::inRandomOrder()->take(rand(1,3))->get()->toArray());
         $this->setPrimaryKey('id')
             ->setDebugEnabled()
             ->setAdditionalSelects(['news.id as id'])

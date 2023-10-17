@@ -27,6 +27,9 @@ trait DemoTrait {
     public string $chosenLocale = 'en';
 
     public array $availableLocales = [];
+    
+    #[Url(as: 'pagMeth', keep: true)]
+    public string $chosenPaginationMethod = 'standard';
 
 
     public function updatedTheme(string $theme)

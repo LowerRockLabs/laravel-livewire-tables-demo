@@ -16,7 +16,6 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\{DateFilter, DateRangeFilter, 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\TestFilterTrait;
-//use App\Http\Livewire\LivewireComponentFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\LivewireComponentFilter;
 use Livewire\Attributes\On; 
 use App\Traits\DemoTablesTrait;
@@ -40,8 +39,6 @@ class UsersTable extends DataTableComponent
     public array $filterComponents2 = ['test_filter' => ''];
 
     public array $allTags = [];
-
-    public string $filterLayout = 'popover';
 
     public array $fileList;
 
@@ -67,16 +64,7 @@ class UsersTable extends DataTableComponent
 
     public function configure(): void
     {
-        ///$component = $this;
-       //$this->userInstance = User::firstOrFail();
         $componentQueryString = [];
-        //$userExample->tags()->sync(Tag::inRandomOrder()->take(rand(1,3))->get()->pluck('tags.id')->toArray());
-        //$user = User::findOrFail(1);
-        //$user->jsoncol = ['test' => 'test123', 'new' => ''];
-        //$user->save();
-        //$this->userExample
-        //(Tag::inRandomOrder()->take(rand(1,3))->get()->toArray());
-        //$this->setDebugEnabled();
         
         $this->setPrimaryKey('id')
             ->setReorderEnabled()
@@ -129,15 +117,6 @@ class UsersTable extends DataTableComponent
                 'id' => 'table-users2',
                 'class' => 'bg-red-500 min-h-full',
             ])
-           // ->setFilterPopoverAttributes([
-               // //'class' => 'bg-red-500',
-               // 'style' => 'background-color: green;',
-             //   'default' => true
-          //  ])
-          //  ->setSearchFieldAttributes([
-          //      'style' => 'background-color: green;',
-          //      'default' => true
-          //  ])
             ->setDefaultReorderSort('sort', 'asc')
             ->setEagerLoadAllRelationsDisabled()
             ->setPaginationMethod('cursor')
@@ -422,7 +401,6 @@ class UsersTable extends DataTableComponent
                     ->filter(function (Builder $builder, string $value) {
                         $builder->whereDate('users.email_verified_at', '>=', $value);
                     })
-                    //->setFilterDefaultValue('2023-07-01')
                     ->setFilterSlidedownRow(2)
                     ->setFilterSlidedownColspan("2"),
 
@@ -434,7 +412,6 @@ class UsersTable extends DataTableComponent
                         $builder->where('users.email_verified_at', '<=', $value);
                     })->setFilterSlidedownRow(3)
                     ->setFilterSlidedownColspan(2)
-                   // ->setFilterDefaultValue('2023-07-04T01:17')
                     ->setFilterPillBlade('includes.customFilterPillBlade'),
 
                 TextFilter::make('Email5')
@@ -464,7 +441,6 @@ class UsersTable extends DataTableComponent
                     ->filter(function (Builder $builder, string $value) {
                         $builder->whereDate('users.email_verified_at', '>=', $value);
                     })
-                    //->setFilterDefaultValue('2023-07-01')
                     ->setFilterSlidedownRow(2)
                     ->setFilterSlidedownColspan("2"),
 
@@ -476,14 +452,9 @@ class UsersTable extends DataTableComponent
                             $builder->where('users.email_verified_at', '<=', $value);
                         })->setFilterSlidedownRow(3)
                         ->setFilterSlidedownColspan(2)
-                       // ->setFilterDefaultValue('2023-07-04T01:17')
                         ->setFilterPillBlade('includes.customFilterPillBlade'),
                         
                     TextFilter::make('User Namesss', 'user_name_filter')
-                    //->setFilterAttributes([
-                   //     'class' => 'bg-red-500',
-                   //     'default' => false,
-                   // ])
                     ->filter(function (Builder $builder, string $value) {
                         return $builder->where('users.name', '=', $value);
                     }),
@@ -510,8 +481,7 @@ class UsersTable extends DataTableComponent
         $users = $this->getSelected();
 
         $this->clearSelected();
-        dd($users);
-                //return Excel::download(new UsersExport($users), 'users.xlsx');
+        return Excel::download(new UsersExport($users), 'users.xlsx');
     }
 
     public function activate()
@@ -530,7 +500,6 @@ class UsersTable extends DataTableComponent
 
     public function reorder(array $items): void
     {
-        //User::upsert($items, [$this->getPrimaryKey()], ['sort']);
         foreach ($items as $item) {
             User::find($item[$this->getPrimaryKey()])->update(['sort_order' => (int)$item[$this->getDefaultReorderColumn()]]);
         }
@@ -552,13 +521,5 @@ class UsersTable extends DataTableComponent
             
 
         }
-
-
-    
-       // $this->updateFilterOptions();
-
     }
-
-
-
 }
