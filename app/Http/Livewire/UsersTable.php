@@ -48,6 +48,10 @@ class UsersTable extends DataTableComponent
 
     public User $userInstance;
 
+    public array $tagFilterList = [];
+
+    public array $userFilterList = [];
+
     #[Reactive] 
     public string $testWireable = 'tesat 123';
 
@@ -62,6 +66,30 @@ class UsersTable extends DataTableComponent
         return;
     }
 
+    public function getTagFilterList()
+    {
+        $tagFilterList = Cache::remember('allTags', 3600, function () {
+            return Tag::select('id', 'name', 'created_at')->orderBy('name')
+            ->get()
+            ->pluck('name','id')->toArray();
+        });
+        $this->tagFilterList = $tagFilterList;
+
+        return $tagFilterList;
+    }
+    public function getUserFilterList()
+    {
+        $userFilterList = Cache::remember('allUsers', 3600, function () {
+            return User::select('name','id')
+            ->get()
+            ->pluck('name','id')->toArray();
+        });
+
+        $this->userFilterList = $userFilterList;
+
+        return $userFilterList;
+    }
+
     public function configure(): void
     {
         $componentQueryString = [];
@@ -69,17 +97,17 @@ class UsersTable extends DataTableComponent
         $this->setPrimaryKey('id')
             ->setReorderEnabled()
             ->setHideBulkActionsWhenEmptyEnabled()
-
+            ->setSearchBlur()
             ->setAdditionalSelects(['users.id as id', 'users.parent_id as parent_id'])
             ->setFilterLayout($this->filterLayout)
             ->setSingleSortingDisabled()
             ->setTdAttributes(function(Column $column, $row, $columnIndex, $rowIndex) {
                 if ($column->getTitle() == 'Address') {
-                    return ['class' => 'text-red-500 break-all', 
-                            'default' => false
+                    return [
+                        'class' => 'text-red-500 break-all',
                     ];
                 }
-                else return ['default' => true];
+                else return [];
 
             })
             ->setSecondaryHeaderTrAttributes(function ($rows) {
@@ -96,7 +124,6 @@ class UsersTable extends DataTableComponent
                 }
                 else return ['default' => true];
             })
-            ->setExcludeDeselectedColumnsFromQueryDisabled()
             ->setFooterTrAttributes(function ($rows) {
                 return ['class' => 'bg-gray-100'];
             })
@@ -117,6 +144,7 @@ class UsersTable extends DataTableComponent
                 'id' => 'table-users2',
                 'class' => 'bg-red-500 min-h-full',
             ])
+            ->setReorderDisabled()
             ->setDefaultReorderSort('sort', 'asc')
             ->setEagerLoadAllRelationsDisabled()
             ->setPaginationMethod('cursor')
@@ -125,7 +153,8 @@ class UsersTable extends DataTableComponent
             ->setLoadingPlaceholderEnabled()
             ->setConfigurableAreas([
                 'before-tools' => 'tables.user-before-tools'
-            ]);
+            ])
+            ->setQueryStringEnabled();
 
 
     }
@@ -280,14 +309,14 @@ class UsersTable extends DataTableComponent
         return [
 
             SelectFilter::make('UserFilter')
-            ->options(Cache::remember('allUsers', 3600, function () {
-                return User::select('name','id')
-                ->get()
-                ->pluck('name','id')->toArray();
-            })),
+            ->options(
+                (!empty($this->userFilterList) ? $this->userFilterList : $this->getUserFilterList())
+            ),
 
             SelectFilter::make('TagFilter')
-            ->options([]),
+            ->options(
+                (!empty($this->tagFilterList) ? $this->tagFilterList : $this->getTagFilterList())
+            ),
 
             TextFilter::make('Name')
                 ->config([
@@ -306,9 +335,9 @@ class UsersTable extends DataTableComponent
                     'placeholder' => 'Search Email',
                 ])
                 ->filter(function (Builder $builder, string $value) {
-                    $builder->where('users.email', 'like', '%'.$value.'%');
-                })
-                ->hiddenFromMenus(),
+                   $builder = $this->applyEmailFilter($builder, $value);
+                }),
+
                 NumberRangeFilter::make('Success Rate')
                 ->options(
                     [
@@ -325,17 +354,13 @@ class UsersTable extends DataTableComponent
                     $builder->where('users.success_rate', '>=', intval($values['min']))
                     ->where('users.success_rate', '<=', intval($values['max']));
                 }),
+
             MultiSelectFilter::make('Tags')
             ->options(
-                Cache::remember('allTags', 3600, function () {
-                    return Tag::select('id', 'name', 'created_at')->orderBy('name')
-                    ->get()
-                    ->pluck('name','id')->toArray();
-                })
+                (!empty($this->tagFilterList) ? $this->tagFilterList : $this->getTagFilterList())
             )->filter(function (Builder $builder, array $values) {
                 $builder->whereHas('tags', fn ($query) => $query->whereIn('tags.id', $values));
             })
-            ->setFirstOption("I don't care")
             ->setFilterPillValues([
                 '3' => 'Tag 1',
             ]),
@@ -347,6 +372,7 @@ class UsersTable extends DataTableComponent
                 'dateFormat' => 'Y-m-d',
                 'earliestDate' => '2020-01-01',
                 'latestDate' => '2023-08-01',
+                'placeholder' => 'Enter Date',
             ])
             ->setFilterPillValues([0 => 'minDate', 1 => 'maxDate'])
             ->filter(function (Builder $builder, array $dateRange) {
@@ -406,7 +432,7 @@ class UsersTable extends DataTableComponent
 
                 DateTimeFilter::make('Verified To')
                 ->config([
-                    'pillFormat' => 'd-m-Y H:i'
+                    'pillFormat' => 'd-m-Y H:i',
                 ])
                     ->filter(function (Builder $builder, string $value) {
                         $builder->where('users.email_verified_at', '<=', $value);
@@ -424,6 +450,16 @@ class UsersTable extends DataTableComponent
                 ->filter(function (Builder $builder, string $value) {
                     $builder->where('users.email', 'like', '%'.$value.'%');
                 })->setFilterSlidedownRow("2"),
+
+                NumberFilter::make('Success No')
+                ->setFilterPillTitle('Success No')
+                ->config([
+                    'placeholder' => 'Success No',
+                ])
+                ->filter(function (Builder $builder, string $value) {
+                    $builder->where('users.success_rate', $value);
+                })->setFilterSlidedownRow("2"),
+
             ];
     }
 
@@ -460,6 +496,11 @@ class UsersTable extends DataTableComponent
                     }),
         
         ];
+    }
+
+    public function applyEmailFilter(Builder $builder, string $value)
+    {
+        return $builder->where('users.email', 'like', '%'.$value.'%');
     }
 
     public function builder(): Builder

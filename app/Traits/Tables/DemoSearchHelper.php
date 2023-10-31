@@ -18,7 +18,7 @@ trait DemoSearchHelper {
 
     public function bootDemoSearchHelper()
     {
-        $this->setupSearchMethod();
+       // $this->setupSearchMethod();
     }
 
     public function updatedSearchMethodOption($value)
