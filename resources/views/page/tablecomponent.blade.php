@@ -1,7 +1,6 @@
 <div style="margin-top: 5em;">
-@include('includes.sections.header.demoControls')
-    
+    @include('includes.sections.header.demoControls')
     <div class="h-screen" wire:key="{{ $filterDemoKey }}-wrapper">
-        <livewire:dynamic-component :key="$filterDemoKey" :is="$selectedTable" theme="{{ $tableTheme }}" filterLayout="{{ $filterLayout }}"  externalPaginationMethod="{{ $chosenPaginationMethod }}" />
+        <livewire:dynamic-component :key="$filterDemoKey" :is="$selectedTable" theme="{{ $tableTheme }}"  />
     </div>
 </div>

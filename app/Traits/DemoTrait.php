@@ -31,7 +31,6 @@ trait DemoTrait {
     #[Url(as: 'pagMeth', keep: true)]
     public string $chosenPaginationMethod = 'standard';
 
-
     public function updatedTheme(string $theme)
     {
         $this->setTableTheme($theme);        

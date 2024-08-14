@@ -2,29 +2,23 @@
 
 namespace App\Http\Livewire;
 
-use App\Exports\ArticleExport;
-use App\Models\Article;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\{Builder,Collection};
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\{Paginator, CursorPaginator,LengthAwarePaginator};
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ButtonGroupColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ComponentColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\LinkColumn;
-use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
-use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
-use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
-use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
-use Illuminate\Support\Facades\Storage;
-use App\Traits\DemoTablesTrait;
+use Rappasoft\LaravelLivewireTables\Views\Columns\{BooleanColumn,ImageColumn,ButtonGroupColumn,ComponentColumn,LinkColumn, DateColumn};
+use Rappasoft\LaravelLivewireTables\Views\Filters\{DateFilter,NumberFilter,MultiSelectFilter,SelectFilter,TextFilter};
+use App\Traits\Tables\UsesDemoTables;
+use App\Exports\ArticleExport;
+use App\Models\Article;
 
 class ArticleTable extends DataTableComponent
 {
-    use DemoTablesTrait;
+    use UsesDemoTables;
 
     public $myParam = 'Default123';
 
@@ -37,7 +31,6 @@ class ArticleTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
-            ->setDebugEnabled()
             ->setAdditionalSelects(['articles.id as id'])
             ->setFilterLayout($this->filterLayout)
             ->setReorderEnabled()
@@ -110,11 +103,15 @@ class ArticleTable extends DataTableComponent
                 ->collapseOnTablet(),
     
             BooleanColumn::make('Is Published', 'is_published'),
+            
+            Column::make('Likes', 'likes')->sortable(),
 
             Column::make('User', 'user.name')->searchable()
             ->collapseOnTablet(),
 
-            Column::make('Published At', 'published_at')
+            DateColumn::make('Published At', 'published_at')
+            ->inputFormat('Y-m-d H:i:s')
+            ->outputFormat('Y-m-d H:i:s')
             ->sortable(function (Builder $query, string $direction) {
                 return $query->orderBy('published_at', $direction); // Example, ->sortable() would work too.
             })
@@ -142,6 +139,21 @@ class ArticleTable extends DataTableComponent
             ->filter(function (Builder $builder, string $value) {
                 $builder->where('title', 'like', '%'.$value.'%');
             }),
+            NumberFilter::make('Minimum Likes', 'min_like_filter')
+                ->filter(function (Builder $builder, int $value) {
+                    return $builder->where('likes', '>', $value);
+                }),
+            SelectFilter::make('Published', 'published_status')
+            ->options(
+                [
+                    '' => 'Select',
+                    0 => 'No',
+                    1 => 'Yes',
+                ]
+            )
+            ->filter(function (Builder $builder, int $value) {
+                return $builder->where('is_published', $value);
+            })
 
         ];
     }
@@ -182,7 +194,15 @@ class ArticleTable extends DataTableComponent
 
         $this->clearSelected();
     }
+    
+    public function prependRows($rows)
+    {
+        $newRow = new Article;
+        $newRow->id ='1';
+        $rows->push($newRow);
 
+        return $rows;
+    }
 
 
 }

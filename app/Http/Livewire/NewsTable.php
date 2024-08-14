@@ -12,11 +12,11 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\{BooleanColumn, ButtonGroupColumn, ComponentColumn, ImageColumn, LinkColumn};
 use Rappasoft\LaravelLivewireTables\Views\Filters\{DateFilter, DateRangeFilter, DateTimeFilter, MultiSelectDropdownFilter, MultiSelectFilter, NumberFilter, NumberRangeFilter, SelectFilter, TextFilter};
-use App\Traits\DemoTablesTrait;
+use App\Traits\Tables\UsesDemoTables;
 
 class NewsTable extends DataTableComponent
 {
-    use DemoTablesTrait;
+    use UsesDemoTables;
 
     public $myParam = 'Default123';
 
@@ -29,7 +29,6 @@ class NewsTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id')
-            ->setDebugEnabled()
             ->setAdditionalSelects(['news.id as id'])
             ->setFilterLayout($this->filterLayout)
             ->setReorderEnabled()
@@ -70,7 +69,6 @@ class NewsTable extends DataTableComponent
             ->setQueryStringAlias('news-table')
             ->setHideBulkActionsWhenEmptyEnabled()
             ->setEagerLoadAllRelationsEnabled()
-            
              ->setDefaultReorderSort('sort_order', 'desc');
 
     }
@@ -97,7 +95,8 @@ class NewsTable extends DataTableComponent
                 ->footer($this->getFilterByKey('name')),
 
             Column::make('Description', 'description'),
-            Column::make('User', 'user.name'),
+            Column::make('User', 'user.name')
+            ->collapseAlways(),
             Column::make('Topics')
             ->sortable()
             ->searchable()

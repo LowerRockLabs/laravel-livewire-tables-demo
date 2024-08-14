@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\OldDemos;
 
 use App\Models\News;
 use Carbon\Carbon;

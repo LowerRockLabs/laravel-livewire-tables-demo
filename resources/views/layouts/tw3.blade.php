@@ -1113,15 +1113,15 @@
     </script>
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
-
     @vite(['resources/js/app.js'])
+
     @stack('styles')
         <style>
             [x-cloak] { display: none !important; }
         </style>
 </head>
 
-<body class="dark:bg-gray-900 dark:text-white">
+<body class="dark:bg-gray-900 dark:text-white" >
 
     <div>
     <div class="mb-8 text-center">
@@ -1136,6 +1136,7 @@
         </div>
         @livewireScriptConfig 
         @stack('scripts')
+    
     </div>
 </body>
 

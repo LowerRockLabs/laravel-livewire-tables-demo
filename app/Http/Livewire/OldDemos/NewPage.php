@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Demos;
+namespace App\Http\Livewire\OldDemos;
 
 use Livewire\Component;
 use Livewire\Attributes\Url;
@@ -9,8 +9,7 @@ use App\Traits\DemoTrait;
 class NewPage extends Component
 {
     use DemoTrait;
-
-    
+   
     public function mount()
     {
         $this->setTableTheme($this->theme);        
@@ -19,7 +18,6 @@ class NewPage extends Component
             $this->availableLocales = config('app.available_locales');
         }
         $this->checkAndUpdateChosenLocale($this->chosenLocale);
-
     }
 
 

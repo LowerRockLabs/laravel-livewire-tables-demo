@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\LivewireDemos;
+namespace App\Http\Livewire\OldDemos\LivewireDemos;
 
 use Livewire\Component;
 use Livewire\Attributes\Url;

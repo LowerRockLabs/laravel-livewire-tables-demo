@@ -11,6 +11,8 @@ trait DemoSearchHelper {
 
     public array $searchMethodOptions = ['debounce-250' => 'Debounce 250ms', 'debounce-2000' => 'Debounce 2000ms', 'blur' => 'Blur', 'live' => 'Live', 'defer' => 'Defer', 'lazy' => 'Lazy'];
 
+    public bool $demoTrimSearchString = false;
+
     public function resetSearchMethod()
     {
         $this->searchFilterLazy = $this->searchFilterBlur = $this->searchFilterLive = $this->searchFilterDefer = $this->searchFilterDebounce = $this->searchFilterThrottle = null;
@@ -19,6 +21,28 @@ trait DemoSearchHelper {
     public function bootDemoSearchHelper()
     {
        // $this->setupSearchMethod();
+       if ($this->demoTrimSearchString == true)
+       {
+           $this->setTrimSearchStringEnabled();
+       }
+       else
+       {
+           $this->setTrimSearchStringDisabled();
+       }
+
+    }
+
+    public function updatedDemoTrimSearchString(bool $value)
+    {
+        if ($value == true)
+        {
+            $this->setTrimSearchStringEnabled();
+        }
+        else
+        {
+            $this->setTrimSearchStringDisabled();
+        }
+ 
     }
 
     public function updatedSearchMethodOption($value)

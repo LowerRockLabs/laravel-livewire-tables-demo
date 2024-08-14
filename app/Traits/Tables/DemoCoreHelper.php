@@ -11,6 +11,16 @@ trait DemoCoreHelper {
         $this->setConfigurableAreas([
             'before-tools' => 'livewire.tables.before-tools.table-controls',
         ]);
+        if ($this->demoTrimSearchString == true)
+        {
+            $this->setTrimSearchStringEnabled();
+        }
+        else
+        {
+            $this->setTrimSearchStringDisabled();
+        }
+ 
+ 
         
     }
 

@@ -8,17 +8,44 @@ use App\Models\{Breed,Pet,Species};
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\{BooleanColumn, ButtonGroupColumn, ComponentColumn, ImageColumn, LinkColumn};
 use Rappasoft\LaravelLivewireTables\Views\Filters\{DateFilter, DateRangeFilter, DateTimeFilter, MultiSelectDropdownFilter, MultiSelectFilter, NumberFilter, NumberRangeFilter, SelectFilter, TextFilter};
-use App\Traits\DemoTablesTrait;
+use App\Traits\Tables\UsesDemoTables;
 
 class PetsTable extends DataTableComponent
 {
-    use DemoTablesTrait;
+    use UsesDemoTables;
 
     public $model = Pet::class;
 
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+
+        $this->setBulkActionsThAttributes([
+            'class' => 'bg-blue-500 px-6 py-3 text-center text-xs font-medium whitespace-nowrap text-gray-500 uppercase tracking-wider dark:bg-red-800 dark:text-gray-400',
+            'default' => false,
+        ]);
+
+        $this->setThAttributes(function (Column $column) {
+            if ($column->isField('age')) {
+                return [
+                    'class' => 'px-6 py-3 text-center text-xs font-medium whitespace-nowrap uppercase tracking-wider bg-green-500 text-slate-50 dark:bg-green-500 dark:text-slate-50',
+                    'default' => false,
+                ];
+            }
+
+            if ($column->getTitle() == 'Breed')
+            {
+                return [
+                    'class' => 'px-6 py-3 text-center text-xs font-medium whitespace-nowrap uppercase tracking-wider bg-red-500 text-white dark:bg-red-500 dark:text-white',
+                    'default' => false,
+                ];
+    
+            }
+
+            return [
+            ];
+        });
+
     }
 
     public function columns(): array

@@ -17,18 +17,8 @@
                 @include('includes.sections.header.controls.tableSwitcher')
             </div>
             <div style="margin: 1em">
-                @include('includes.sections.header.controls.filterSwitcher')
-            </div>
-            <div style="margin: 1em">
-                @include('includes.sections.header.controls.themeSwitcher')
-            </div>
-            <div style="margin: 1em">
                 @include('includes.sections.header.controls.localeSwitcher')
             </div>
-            <div style="margin: 1em">
-                @include('includes.sections.header.controls.paginationSwitcher')
-            </div>
-
         </div>
 
     </div>

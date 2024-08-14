@@ -55,11 +55,11 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'sslmode' => 'prefer',
             'prefix_indexes' => true,
             'strict' => false,
             'engine' => null,
         ],
+
 
         'pgsql' => [
             'driver' => 'pgsql',
@@ -127,7 +127,6 @@ return [
 
 
         'default' => [
-            'scheme' => 'tls',
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
@@ -135,7 +134,6 @@ return [
         ],
 
         'cache' => [
-            'scheme' => 'tls',
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
@@ -143,7 +141,6 @@ return [
         ],
 
         'session' => [
-            'scheme' => 'tls',
             'host' => env('REDIS_HOST', '127.0.0.1'),
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
