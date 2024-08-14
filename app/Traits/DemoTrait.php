@@ -9,9 +9,6 @@ trait DemoTrait {
  
     public string $originalTheme;
 
-    #[Url(as: 'filter-layout', keep: true)]
-    public string $filterLayout = 'popover';
-
     public $filterDemoKey = '';
 
     #[Url(as: 'selected-table', keep: true)]
@@ -27,9 +24,6 @@ trait DemoTrait {
     public string $chosenLocale = 'en';
 
     public array $availableLocales = [];
-    
-    #[Url(as: 'pagMeth', keep: true)]
-    public string $chosenPaginationMethod = 'standard';
 
     public function updatedTheme(string $theme)
     {
@@ -40,8 +34,6 @@ trait DemoTrait {
     public function updatedChosenLocale($val)
     {
         $this->checkAndUpdateChosenLocale($val);
-
-
     }
 
     public function checkAndUpdateChosenLocale($val)
@@ -50,7 +42,6 @@ trait DemoTrait {
         {
             App::setLocale($val);
         }
-
     }
 
     public function setTableTheme(string $theme)
@@ -70,7 +61,7 @@ trait DemoTrait {
 
     public function setFilterDemoKey()
     {
-        $this->filterDemoKey = $this->selectedTable.'-'.$this->filterLayout.'-'.$this->theme;
+        $this->filterDemoKey = $this->selectedTable.'-'.$this->theme;
     }
 
     public function rendering()

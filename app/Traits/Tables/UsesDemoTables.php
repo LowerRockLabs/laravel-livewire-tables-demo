@@ -23,7 +23,7 @@ trait UsesDemoTables {
 
     public function configuredUsesDemoTables()
     {
-        $this->setConfigurableArea('before-tools', 'includes.tableCustomView');
+        $this->setConfigurableArea('before-tools', 'includes.tables.before-tools');
     }
 
     public function refreshWindow()

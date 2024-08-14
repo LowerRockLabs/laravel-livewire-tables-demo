@@ -19,12 +19,12 @@ use App\Traits\TestFilterTrait;
 //use App\Http\Livewire\LivewireComponentFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\LivewireComponentFilter;
 use Livewire\Attributes\On; 
-use App\Traits\DemoTablesTrait;
+use App\Traits\Tables\UsesDemoTables;
 
 class UsersTable extends DataTableComponent
 {
     use TestFilterTrait;
-    use DemoTablesTrait;
+    use UsesDemoTables;
 
     public $myParam = 'Default';
 

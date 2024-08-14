@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Demos;
 
 use Livewire\Component;
-use Livewire\Attributes\Url;
+use Livewire\Attributes\{Layout,Url};
 use App\Traits\DemoTrait;
 
 class Bootstrap4 extends Component
@@ -16,9 +16,9 @@ class Bootstrap4 extends Component
         $this->setTableTheme('bs4');        
     }
 
+    #[Layout('layouts.bs4')] 
     public function render()
     {
-        return view('page.tablecomponent')->layout('layouts.bs4');
-    
+        return view('page.tablecomponent');
     }
 }
