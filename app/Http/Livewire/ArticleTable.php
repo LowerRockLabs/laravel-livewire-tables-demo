@@ -68,7 +68,6 @@ class ArticleTable extends DataTableComponent
 
                 return ['default' => true];
             })
-            ->setSearchLazy()
             ->setQueryStringAlias('article-table')
             ->setHideBulkActionsWhenEmptyEnabled()
             ->setEagerLoadAllRelationsEnabled()
