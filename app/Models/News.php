@@ -31,7 +31,7 @@ class News extends Model
 
     public function topics(): MorphToMany
     {
-        return $this->morphToMany(Topic::class, 'topicable');
+        return $this->morphToMany(Topic::class, 'topicable')->withTimestamps();
     }
 
 

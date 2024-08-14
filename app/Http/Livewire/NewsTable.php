@@ -4,13 +4,15 @@ namespace App\Http\Livewire;
 
 use App\Exports\NewsExport;
 use App\Models\News;
+use App\Models\Topic;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use Rappasoft\LaravelLivewireTables\Views\Columns\{BooleanColumn, ButtonGroupColumn, ComponentColumn, ImageColumn, LinkColumn};
+use Rappasoft\LaravelLivewireTables\Views\Columns\{ArrayColumn,BooleanColumn, ButtonGroupColumn, ComponentColumn, ImageColumn, LinkColumn};
 use Rappasoft\LaravelLivewireTables\Views\Filters\{DateFilter, DateRangeFilter, DateTimeFilter, MultiSelectDropdownFilter, MultiSelectFilter, NumberFilter, NumberRangeFilter, SelectFilter, TextFilter};
 use App\Traits\Tables\UsesDemoTables;
 
@@ -70,7 +72,6 @@ class NewsTable extends DataTableComponent
             ->setHideBulkActionsWhenEmptyEnabled()
             ->setEagerLoadAllRelationsEnabled()
              ->setDefaultReorderSort('sort_order', 'desc');
-
     }
 
     public function columns(): array
@@ -97,13 +98,14 @@ class NewsTable extends DataTableComponent
             Column::make('Description', 'description'),
             Column::make('User', 'user.name')
             ->collapseAlways(),
-            Column::make('Topics')
-            ->sortable()
-            ->searchable()
+
+            ArrayColumn::make('Topics')
+            ->data(fn($value, $row) => ($row->topics))
+            ->outputFormat(fn($index, $value) => $value->title)
             ->collapseOnTablet()
-            ->label(
-                fn ($row, Column $column) => implode(',',$row->topics->pluck('title')->toArray() ?? [])
-            ),
+            ->emptyValue('None')
+            ->separator('<br />')
+            ->sortable(),
         ];
     }
 
@@ -118,13 +120,30 @@ class NewsTable extends DataTableComponent
             ->filter(function (Builder $builder, string $value) {
                 $builder->where('name', 'like', '%'.$value.'%');
             }),
+            MultiSelectDropdownFilter::make('Topics', 'topics')
+            ->options(
+               $this->getTopicsForFilter()
+            )
+            ->setFirstOption('All')
+            ->filter(function (Builder $builder, array $values) {
+                return $builder->whereHas('topics', function (Builder $query) use ($values) {
+                    $query->whereIn('topic_id', $values);
+                });
+            })
 
         ];
     }
 
+    protected function getTopicsForFilter()
+    {
+        return Cache::rememberForever('topics-for-filter', function () {
+            return Topic::select('id','title as name')->orderBy('name')->get()->pluck('name','id')->toArray();
+        });
+    }
+
     public function builder(): Builder
     {
-        return News::with(['user']);
+        return News::with(['user','topics']);
     }
 
     public function bulkActions(): array

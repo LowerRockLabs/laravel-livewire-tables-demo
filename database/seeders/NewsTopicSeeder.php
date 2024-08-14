@@ -20,7 +20,7 @@ class NewsTopicSeeder extends Seeder
 
         foreach (News::get() as $newsArticle)
         {
-            $newsArticle->topics()->sync($allTopics->random(rand(1,3))->pluck('id')->toArray());
+            $newsArticle->topics()->sync($allTopics->random(rand(1,4))->pluck('id')->toArray());
         }
         
     }
