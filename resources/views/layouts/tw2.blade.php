@@ -13,7 +13,7 @@
 
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
-        @vite(['resources/js/app.js', 'resources/css/app.css'])
+        @vite(['resources/js/app.js', 'resources/css/tailwind2.css'])
         @stack('styles')
 
     </head>

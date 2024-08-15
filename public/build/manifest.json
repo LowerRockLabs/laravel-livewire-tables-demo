@@ -1,18 +1,28 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-930887d1.css",
+    "file": "assets/app-1b24b41c.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/css/tailwind2.css": {
+    "file": "assets/tailwind2-858234eb.css",
+    "isEntry": true,
+    "src": "resources/css/tailwind2.css"
+  },
+  "resources/css/tailwind3.css": {
+    "file": "assets/tailwind3-592a454c.css",
+    "isEntry": true,
+    "src": "resources/css/tailwind3.css"
+  },
   "resources/js/app.css": {
-    "file": "assets/app-c4ab4c01.css",
+    "file": "assets/app-7cdc8b55.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "css": [
-      "assets/app-c4ab4c01.css"
+      "assets/app-7cdc8b55.css"
     ],
-    "file": "assets/app-3c36c03f.js",
+    "file": "assets/app-eb95b6f7.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

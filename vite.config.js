@@ -20,6 +20,8 @@ export default defineConfig({
             input: [
                 'resources/js/app.js',
                 'resources/css/app.css',
+                'resources/css/tailwind2.css',
+                'resources/css/tailwind3.css',
             ],
             refresh: true,
             postcss: [
