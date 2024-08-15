@@ -6,7 +6,7 @@ use Livewire\Attributes\{Locked, Url};
 
 trait HasDebugHelper 
 {
-    #[Url(as: 'showDebug', keep: true)]
+    #[Url(as: 'showDebug', keep: false)]
     public bool $showDebug = false;
 
     public function configuredHasDebugHelper()

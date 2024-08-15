@@ -2,6 +2,8 @@
 
 namespace App\Traits\Tables;
 
+use Livewire\Attributes\{Locked, Url};
+
 trait HasPaginationHelper 
 {
     public string $externalPaginationMethod = 'standard';

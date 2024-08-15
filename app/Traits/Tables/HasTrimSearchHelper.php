@@ -2,8 +2,11 @@
 
 namespace App\Traits\Tables;
 
+use Livewire\Attributes\{Locked, Url};
+
 trait HasTrimSearchHelper 
 {
+    #[Url(as: 'dts', keep: false)]
     public bool $demoTrimSearchString = false;
 
     public function configuringHasTrimSearchHelper()
