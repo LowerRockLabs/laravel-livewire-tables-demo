@@ -8,7 +8,6 @@
     </div>
     <div class="flex flex-cols px-4 mx-4">
         <div style="margin: 1em">@include('includes.sections.header.controls.tableSwitcher')</div>
-        <div style="margin: 1em">@include('includes.sections.header.controls.filterSwitcher')</div>
     </div>
 </div>
 
