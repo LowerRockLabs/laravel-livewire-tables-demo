@@ -2,8 +2,11 @@
 
 namespace App\Traits\Tables;
 
+use Livewire\Attributes\{Locked, Url};
+
 trait HasSearchHelper 
 {
+    #[Locked]
     public array $searchMethodOptions = ['debounce-250' => 'Debounce 250ms', 'debounce-2000' => 'Debounce 2000ms', 'blur' => 'Blur', 'live' => 'Live', 'defer' => 'Defer', 'lazy' => 'Lazy'];
 
     #[Url(as: 'smo')]

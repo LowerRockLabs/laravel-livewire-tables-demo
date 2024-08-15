@@ -2,8 +2,11 @@
 
 namespace App\Traits\Tables;
 
+use Livewire\Attributes\{Locked, Url};
+
 trait HasDebugHelper 
 {
+    #[Url(as: 'showDebug', keep: true)]
     public bool $showDebug = false;
 
     public function configuredHasDebugHelper()
