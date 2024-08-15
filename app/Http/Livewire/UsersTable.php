@@ -200,9 +200,8 @@ class UsersTable extends DataTableComponent
                     return $query->orderBy('users.name', $direction); // Example, ->sortable() would work too.
                 })
                 ->searchable()
-                ->excludeFromColumnSelect()
-                //->collapseOnMobile()
-                ->footer($this->getFilterByKey('name')),
+                //->footer($this->getFilterByKey('name'))
+                ->excludeFromColumnSelect(),
 
     
             Column::make('Test2')
@@ -234,13 +233,13 @@ class UsersTable extends DataTableComponent
             ->sortable(function (Builder $query, string $direction) {
                 return $query->orderBy('email', $direction); // Example, ->sortable() would work too.
             })
+             ->secondaryHeaderFilter('email')
+            //->footer($this->getFilterByKey('email'))
             ->searchable(
                 function (Builder $query, $searchTerm) {
                     $query->orWhere('users.email', 'like', '%'.$searchTerm.'%');
                 } 
-            )
-            ->secondaryHeaderFilter('email')
-            ->footer($this->getFilterByKey('email')),
+            ),
 
 
             Column::make('Verified At', 'email_verified_at')
@@ -272,8 +271,8 @@ class UsersTable extends DataTableComponent
                 ->searchable(),
 
             BooleanColumn::make('Active')
-                ->sortable()
-                ->footerFilter('active'),
+                //->footerFilter('active')
+                ->sortable(),
 
             Column::make('Tags')
                 ->label(fn ($row) => $row->tags->pluck('name')->implode(', ')),
@@ -283,170 +282,215 @@ class UsersTable extends DataTableComponent
         ];
     }
 
+    protected function getUserNameSelectFilter(): SelectFilter
+    {
+        return SelectFilter::make('UserFilter')
+            ->options(
+                (!empty($this->userFilterList) ? $this->userFilterList : $this->getUserFilterList())
+            );
+    }
+
+    protected function getTagMsDdFilter(): MultiSelectDropdownFilter
+    {
+        return MultiSelectDropdownFilter::make('TagFilter')
+        ->options(
+            (!empty($this->tagFilterList) ? $this->tagFilterList : $this->getTagFilterList())
+        );
+    }
+
+    protected function getUserNameTextFilter(): TextFilter
+    {
+        return TextFilter::make('Name')
+        ->config([
+            'maxlength' => 10,
+            'placeholder' => 'Search Name',
+        ])
+        ->filter(function (Builder $builder, string $value) {
+            $builder->where('users.name', 'like', '%'.$value.'%');
+        })->setFilterLabelAttributes(
+            ['class' => 'text-xl', 'for' => 'test1231231', 'default' => true]
+        );
+    }
+
+    protected function getEmailTextFilter(): TextFilter
+    {
+        return TextFilter::make('Email')
+        ->config([
+            'maxlength' => 10,
+            'placeholder' => 'Search Email',
+        ])
+        ->filter(function (Builder $builder, string $value) {
+           $builder = $this->applyEmailFilter($builder, $value);
+        })
+        ->setCustomView('text-custom-view');
+    }
+
+    protected function getSuccessRateNumberRangeFilter(): NumberRangeFilter
+    {
+        return NumberRangeFilter::make('Success Rate')
+        ->options(
+            [
+                'min' => 0,
+                'max' => 100,
+            ]
+        )
+        ->config([
+            'minRange' => 0,
+            'maxRange' => 100,
+            'suffix' => '%',
+            'prefix' => '!',
+        ])
+        ->filter(function (Builder $builder, array $values) {
+            $builder->where('users.success_rate', '>=', intval($values['min']))
+            ->where('users.success_rate', '<=', intval($values['max']));
+        });
+    }
+
+    protected function getMultiSelectTagFilter(): MultiSelectFilter
+    {
+        return MultiSelectFilter::make('Tags')
+        ->options(
+            (!empty($this->tagFilterList) ? $this->tagFilterList : $this->getTagFilterList())
+        )->filter(function (Builder $builder, array $values) {
+            $builder->whereHas('tags', fn ($query) => $query->whereIn('tags.id', $values));
+        })
+        ->setFilterPillValues([
+            '3' => 'Tag 1',
+        ]);
+    }
+
+    protected function getEmailVerifiedDateRangeFilter(): DateRangeFilter
+    {
+        return DateRangeFilter::make('EMail Verified Range')
+        ->config([
+            'ariaDateFormat' => 'F j, Y',
+            'dateFormat' => 'Y-m-d',
+            'earliestDate' => '2020-01-01',
+            'latestDate' => '2023-08-01',
+            'placeholder' => 'Enter Date',
+        ])
+        ->setFilterPillValues([0 => 'minDate', 1 => 'maxDate'])
+        ->filter(function (Builder $builder, array $dateRange) {
+            $builder->whereDate('users.email_verified_at', '>=', $dateRange['minDate'])->whereDate('users.email_verified_at', '<=', $dateRange['maxDate']);
+        });
+    }
+
+    protected function getEmailVerifiedSelectFilter(): SelectFilter
+    {
+        return SelectFilter::make('E-mail Verified', 'email_verified_at')
+        ->setFilterPillTitle('Verified')
+        ->setCustomFilterLabel('includes.customFilterLabel1')
+        ->setFilterPillBlade('includes.customFilterPills2')
+        ->options([
+            '' => 'Any',
+            'yes' => 'Yes',
+            'no' => 'No',
+        ])
+        ->filter(function (Builder $builder, string $value) {
+            if ($value === 'yes') {
+                $builder->whereNotNull('users.email_verified_at');
+            } elseif ($value === 'no') {
+                $builder->whereNull('users.email_verified_at');
+            }
+        });
+    }
+
+    protected function getActiveSelectFilter(): SelectFilter
+    {
+        return SelectFilter::make('Active')
+        ->setFilterSlidedownRow(2)
+        ->setFilterSlidedownColspan(2)
+        ->setFilterPillTitle('User Status')
+        ->setFilterPillValues([
+            '1' => 'Active',
+            '0' => 'Inactive',
+        ])
+        ->options([
+            '' => 'All',
+            '1' => 'Yes',
+            '0' => 'No',
+        ])
+        ->filter(function (Builder $builder, string $value) {
+            if ($value === '1') {
+                $builder->where('users.active', true);
+            } elseif ($value === '0') {
+                $builder->where('users.active', false);
+            }
+        })
+        ->hiddenFromAll();
+    }
+
+    protected function getVerifiedFromDateFilter(): DateFilter
+    {
+        return DateFilter::make('Verified From')
+        ->config([
+            'min' => '2023-07-01',
+            'max' => '2023-12-01',
+            'pillFormat' => 'd-m-Y'
+        ])
+        ->filter(function (Builder $builder, string $value) {
+            $builder->whereDate('users.email_verified_at', '>=', $value);
+        })
+        ->setFilterSlidedownRow(2)
+        ->setFilterSlidedownColspan("2");
+    }
+
+    protected function getVerifiedToDateTimeFilter(): DateTimeFilter
+    {
+        return DateTimeFilter::make('Verified To')
+        ->config([
+            'pillFormat' => 'd-m-Y H:i',
+        ])
+            ->filter(function (Builder $builder, string $value) {
+                $builder->where('users.email_verified_at', '<=', $value);
+            })->setFilterSlidedownRow(3)
+            ->setFilterSlidedownColspan(2)
+            ->setFilterPillBlade('includes.customFilterPillBlade');
+    }
+
+    protected function getEmail5TextFilter(): TextFilter
+    {
+        return TextFilter::make('Email5')
+        ->setFilterPillTitle('User Email')
+        ->setCustomFilterLabel('includes.customFilterLabel2')
+        ->config([
+            'maxlength' => 10,
+            'placeholder' => 'Search Email',
+        ])
+        ->filter(function (Builder $builder, string $value) {
+            $builder->where('users.email', 'like', '%'.$value.'%');
+        })->setFilterSlidedownRow("2");
+    }
+
+    protected function getSuccessNoNumberFilter(): NumberFilter
+    {
+        return NumberFilter::make('Success No')
+        ->setFilterPillTitle('Success No')
+        ->config([
+            'placeholder' => 'Success No',
+        ])
+        ->filter(function (Builder $builder, string $value) {
+            $builder->where('users.success_rate', $value);
+        })->setFilterSlidedownRow("2");
+    }
+
     public function filters(): array
     {
         return [ 
-           // LivewireComponentFilter::make('My External Filter')
-          //  ->setLivewireComponent('select-2-filter')
-          //  ->filter(function (Builder $builder, array $values) {
-         //       dd($values);
-         //       //$builder->where('users.name', 'like', '%'.$value.'%');
-         //   }),
-            SelectFilter::make('UserFilter')
-            ->options(
-                (!empty($this->userFilterList) ? $this->userFilterList : $this->getUserFilterList())
-            ),
-
-            MultiSelectDropdownFilter::make('TagFilter')
-            ->options(
-                (!empty($this->tagFilterList) ? $this->tagFilterList : $this->getTagFilterList())
-            ),
-
-            TextFilter::make('Name')
-                ->config([
-                    'maxlength' => 10,
-                    'placeholder' => 'Search Name',
-                ])
-                ->filter(function (Builder $builder, string $value) {
-                    $builder->where('users.name', 'like', '%'.$value.'%');
-                })->setFilterLabelAttributes(
-                    ['class' => 'text-xl', 'for' => 'test1231231', 'default' => true]
-                ),
-
-            TextFilter::make('Email')
-                ->config([
-                    'maxlength' => 10,
-                    'placeholder' => 'Search Email',
-                ])
-                ->filter(function (Builder $builder, string $value) {
-                   $builder = $this->applyEmailFilter($builder, $value);
-                })
-                ->setCustomView('text-custom-view'),
-
-            NumberRangeFilter::make('Success Rate')
-                ->options(
-                    [
-                        'min' => 0,
-                        'max' => 100,
-                    ]
-                )
-                ->config([
-                    'minRange' => 0,
-                    'maxRange' => 100,
-                    'suffix' => '%',
-                    'prefix' => '!',
-                ])
-                ->filter(function (Builder $builder, array $values) {
-                    $builder->where('users.success_rate', '>=', intval($values['min']))
-                    ->where('users.success_rate', '<=', intval($values['max']));
-                }),
-
-            MultiSelectFilter::make('Tags')
-            ->options(
-                (!empty($this->tagFilterList) ? $this->tagFilterList : $this->getTagFilterList())
-            )->filter(function (Builder $builder, array $values) {
-                $builder->whereHas('tags', fn ($query) => $query->whereIn('tags.id', $values));
-            })
-            ->setFilterPillValues([
-                '3' => 'Tag 1',
-            ]),
-
-
-            DateRangeFilter::make('EMail Verified Range')
-            ->config([
-                'ariaDateFormat' => 'F j, Y',
-                'dateFormat' => 'Y-m-d',
-                'earliestDate' => '2020-01-01',
-                'latestDate' => '2023-08-01',
-                'placeholder' => 'Enter Date',
-            ])
-            ->setFilterPillValues([0 => 'minDate', 1 => 'maxDate'])
-            ->filter(function (Builder $builder, array $dateRange) {
-                $builder->whereDate('users.email_verified_at', '>=', $dateRange['minDate'])->whereDate('users.email_verified_at', '<=', $dateRange['maxDate']);
-            }),
-
-            SelectFilter::make('E-mail Verified', 'email_verified_at')
-                ->setFilterPillTitle('Verified')
-                ->setCustomFilterLabel('includes.customFilterLabel1')
-                ->setFilterPillBlade('includes.customFilterPills2')
-                ->options([
-                    '' => 'Any',
-                    'yes' => 'Yes',
-                    'no' => 'No',
-                ])
-                ->filter(function (Builder $builder, string $value) {
-                    if ($value === 'yes') {
-                        $builder->whereNotNull('users.email_verified_at');
-                    } elseif ($value === 'no') {
-                        $builder->whereNull('users.email_verified_at');
-                    }
-                }),
-                    
-                SelectFilter::make('Active')
-                    ->setFilterSlidedownRow(2)
-                    ->setFilterSlidedownColspan(2)
-                    ->setFilterPillTitle('User Status')
-                    ->setFilterPillValues([
-                        '1' => 'Active',
-                        '0' => 'Inactive',
-                    ])
-                    ->options([
-                        '' => 'All',
-                        '1' => 'Yes',
-                        '0' => 'No',
-                    ])
-                    ->filter(function (Builder $builder, string $value) {
-                        if ($value === '1') {
-                            $builder->where('users.active', true);
-                        } elseif ($value === '0') {
-                            $builder->where('users.active', false);
-                        }
-                    })
-                    ->hiddenFromAll(),
-            
-                DateFilter::make('Verified From')
-                    ->config([
-                        'min' => '2023-07-01',
-                        'max' => '2023-12-01',
-                        'pillFormat' => 'd-m-Y'
-                    ])
-                    ->filter(function (Builder $builder, string $value) {
-                        $builder->whereDate('users.email_verified_at', '>=', $value);
-                    })
-                    ->setFilterSlidedownRow(2)
-                    ->setFilterSlidedownColspan("2"),
-
-                DateTimeFilter::make('Verified To')
-                ->config([
-                    'pillFormat' => 'd-m-Y H:i',
-                ])
-                    ->filter(function (Builder $builder, string $value) {
-                        $builder->where('users.email_verified_at', '<=', $value);
-                    })->setFilterSlidedownRow(3)
-                    ->setFilterSlidedownColspan(2)
-                    ->setFilterPillBlade('includes.customFilterPillBlade'),
-
-                TextFilter::make('Email5')
-                ->setFilterPillTitle('User Email')
-                ->setCustomFilterLabel('includes.customFilterLabel2')
-                ->config([
-                    'maxlength' => 10,
-                    'placeholder' => 'Search Email',
-                ])
-                ->filter(function (Builder $builder, string $value) {
-                    $builder->where('users.email', 'like', '%'.$value.'%');
-                })->setFilterSlidedownRow("2"),
-
-                NumberFilter::make('Success No')
-                ->setFilterPillTitle('Success No')
-                ->config([
-                    'placeholder' => 'Success No',
-                ])
-                ->filter(function (Builder $builder, string $value) {
-                    $builder->where('users.success_rate', $value);
-                })->setFilterSlidedownRow("2"),
-
-            ];
+           // $this->getUserNameSelectFilter(),
+           $this->getActiveSelectFilter(),
+           $this->getEmailTextFilter(),
+           $this->getTagMsDdFilter(),
+           $this->getUserNameTextFilter(),
+           $this->getSuccessRateNumberRangeFilter(),
+           $this->getEmailVerifiedDateRangeFilter(),
+           $this->getEmailVerifiedSelectFilter(),
+           $this->getVerifiedFromDateFilter(),
+           $this->getVerifiedToDateTimeFilter(),
+           $this->getEmail5TextFilter(),
+           $this->getSuccessNoNumberFilter(),
+           $this->getMultiSelectTagFilter(),
+        ];
     }
 
     public function filters2(): array
