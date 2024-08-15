@@ -1,8 +1,11 @@
 <div 
     @class([
-        'd-flex flex-row space-x-2 align-items-center align-content-center mx-2 px-2 py-2' => ($this->getTheme() == 'bootstrap-4' || $this->getTheme() == 'bootstrap-5'),
-        'flex flex-cols space-x-2 align-content-center py-2' => $this->getTheme() == 'tailwind',
+        'd-flex flex-row space-x-2 align-items-center align-content-center items-center mx-2 px-2 py-2 pb-4' => ($this->getTheme() == 'bootstrap-4' || $this->getTheme() == 'bootstrap-5'),
+        'flex flex-cols space-x-2 align-content-center items-center py-2 pb-4' => $this->getTheme() == 'tailwind',
     ])>
+    <div class="px-2 font-bold	fw-bold">
+        Demo Controls:
+    </div>
     <div class="px-2">
         Trim Search String <input type="checkbox" wire:model.live="demoTrimSearchString" />
     </div>
@@ -31,7 +34,6 @@
     </div>
     <div class="px-2">
         Debug <input type="checkbox" wire:model.live="showDebug" />
-
     </div>
 
 </div>

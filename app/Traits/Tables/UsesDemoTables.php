@@ -17,7 +17,6 @@ trait UsesDemoTables {
         $this->setConfigurableAreas([
             'before-tools' => 'livewire.tables.before-tools.table-controls',
         ]); 
-        $this->setPerPageAccepted([10, 25, 50, 100, 250]);
 
     }
 

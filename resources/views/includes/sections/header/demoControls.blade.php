@@ -10,10 +10,9 @@
             <span style="padding: 1em"><a href='bs4'>Bootstrap 4</a></span>
             <span style="padding: 1em"><a href='bs5'>Bootstrap 5</a></span>
         </div>
-            
         <div @class([
-                'inline-flex flex-cols px-4 mx-4' => ($this->theme == 'tailwind' || $this->theme == 'tw3' || $this->theme == 'tw2'),
-                'd-inline-flex  flex-row space-x-2 align-items-center align-content-center mx-2 px-2 py-2' =>  ($this->theme == 'bs4' || $this->theme == 'bs5' || $this->theme == 'bootstrap' || $this->theme == 'bootstrap-4' || $this->theme == 'bootstrap-5'),
+                'inline-flex flex-cols px-4 mx-4 items-center' => ($this->theme == 'tailwind' || $this->theme == 'tw3' || $this->theme == 'tw2'),
+                'd-inline-flex  flex-row space-x-2 align-items-center items-center align-content-center mx-2 px-2 py-2' =>  ($this->theme == 'bs4' || $this->theme == 'bs5' || $this->theme == 'bootstrap' || $this->theme == 'bootstrap-4' || $this->theme == 'bootstrap-5'),
             ])  style='margin-top: 2em'>
             <div style="margin: 1em">
                 @include('includes.sections.header.controls.tableSwitcher')
@@ -21,6 +20,17 @@
             <div style="margin: 1em">
                 @include('includes.sections.header.controls.localeSwitcher')
             </div>
+            <div style="margin: 1em">
+                Table Width 
+                <select wire:model.live="tableWidth" style="color: #000; background-color: #FFF" >
+                    <option value='25'>25%</option>
+                    <option value='50'>50%</option>
+                    <option value='75'>75%</option>
+                    <option value='100'>100%</option>
+                </select>
+
+            </div>
+
         </div>
 
     </div>

@@ -8,6 +8,8 @@ trait HasPaginationHelper
 
     public function configuredHasPaginationHelper()
     {
+        $this->setPerPageAccepted([10, 25, 50, 100, 250]);
+
         if ($this->externalPaginationMethod == 'simple')
         {
             $this->setPaginationMethod('simple');
