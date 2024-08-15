@@ -97,6 +97,7 @@ class NewsTable extends DataTableComponent
 
             Column::make('Description', 'description'),
             Column::make('User', 'user.name')
+            ->searchable()
             ->collapseAlways(),
 
             ArrayColumn::make('Topics')
@@ -118,7 +119,7 @@ class NewsTable extends DataTableComponent
                 'placeholder' => 'Search Name',
             ])
             ->filter(function (Builder $builder, string $value) {
-                $builder->where('name', 'like', '%'.$value.'%');
+                $builder->where('news.name', 'like', '%'.$value.'%');
             }),
             MultiSelectDropdownFilter::make('Topics', 'topics')
             ->options(
