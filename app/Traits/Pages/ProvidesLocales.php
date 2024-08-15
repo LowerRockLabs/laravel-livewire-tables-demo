@@ -2,7 +2,7 @@
 
 namespace App\Traits\Pages;
 
-use Livewire\Attributes\Url;
+use Livewire\Attributes\{Locked, Url};
 use Illuminate\Support\Facades\App;
 
 trait ProvidesLocales 
@@ -10,6 +10,7 @@ trait ProvidesLocales
     #[Url(as: 'chosenLocale', keep: true)]
     public string $chosenLocale = 'en';
 
+    #[Locked]
     public array $availableLocales = [];
 
     public function updatedChosenLocale($val)
