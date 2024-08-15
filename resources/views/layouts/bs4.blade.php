@@ -33,7 +33,7 @@
 
     </div>
 
-    <div class="container w-100">
+    <div class="container-fluid">
          <div>
             <livewire:other-component />
         </div>

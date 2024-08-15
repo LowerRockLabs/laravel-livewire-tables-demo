@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <div>
+    <div class="container-fluid">
         <div class="px-4 my-5 text-center">
             <img class="mx-auto mb-4 d-block" src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
                 <p class="lead">
@@ -38,10 +38,10 @@
                 </p>
         </div>
 
-        <div class="container">
-        <div wire:key="otherComponent">
-            <livewire:other-component />
-        </div>
+        <div>
+            <div wire:key="otherComponent">
+                <livewire:other-component />
+            </div>
         <div>
 
         {{ $slot }}
