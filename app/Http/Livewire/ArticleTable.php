@@ -33,8 +33,6 @@ class ArticleTable extends DataTableComponent
         $this->setPrimaryKey('id')
             ->setAdditionalSelects(['articles.id as id'])
             ->setFilterLayout($this->filterLayout)
-            ->setReorderEnabled()
-            ->setHideReorderColumnUnlessReorderingDisabled()
             ->setTdAttributes(function(Column $column, $row, $columnIndex, $rowIndex) {
                 if ($column->getTitle() == 'Title') {
                     return ['class' => 'text-red-500 break-all', 
@@ -71,8 +69,7 @@ class ArticleTable extends DataTableComponent
             ->setQueryStringAlias('article-table')
             ->setHideBulkActionsWhenEmptyEnabled()
             ->setEagerLoadAllRelationsEnabled()
-             ->setDefaultReorderSort('id', 'desc');
-
+            ->setSearchDebounce(500);
     }
 
     public function columns(): array
