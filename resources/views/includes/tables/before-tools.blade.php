@@ -20,7 +20,7 @@
     <div class="px-2">
         Search Method
         <select wire:model.live="searchMethodOption" style="color: #000; background-color: #FFF" >
-            @foreach($searchMethodOptions as $index => $value)
+            @foreach($this->getSearchMethodOptions as $index => $value)
                 <option style="color: #000; background-color: #FFF" value='{{ $index }}'>{{ $value }}</option>
             @endforeach
         </select>
