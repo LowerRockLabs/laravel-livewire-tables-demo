@@ -1,6 +1,6 @@
 <div>
     Locale Switcher
-    <select wire:model.live="chosenLocale" style="color: #000; background-color: #FFF" >
+    <select wire:model.live="demoChosenLocale" style="color: #000; background-color: #FFF" >
         <option style="color: #000; background-color: #FFF" value='en'>English (en)</option>
         <option style="color: #000; background-color: #FFF"value='fr'>French (fr)</option>
         <option style="color: #000; background-color: #FFF" value='es'>Spanish (es)</option>

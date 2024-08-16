@@ -7,17 +7,17 @@ use Livewire\Attributes\{Locked, Url};
 trait ProvidesTableWidths 
 {
     #[Url(as: 'tableWidth', keep: false)]
-    public int $tableWidth = 100;
+    public int $demoTableWidth = 100;
 
     #[Locked]
-    public string $tableWidthClass = 'w-full';
+    public string $demoTableWidthClass = 'w-full';
 
     public function mountProvidesTableWidths()
     {
         $this->setTableWidthClasses();
     }
 
-    public function updatedTableWidth($value)
+    public function updatedDemoTableWidth($value)
     {
         $this->setTableWidthClasses($value);
     }
@@ -26,24 +26,24 @@ trait ProvidesTableWidths
     {
         if (!isset($value))
         {
-            $value = $this->tableWidth;
+            $value = $this->demoTableWidth;
         }
 
         if ($value == 25)
         {
-            $this->tableWidthClass = ($this->theme == 'tailwind' ? 'w-1/4' : 'w-25');
+            $this->demoTableWidthClass = ($this->demoTheme == 'tailwind' ? 'w-1/4' : 'w-25');
         }
         elseif ($value == 50)
         {
-            $this->tableWidthClass = ($this->theme == 'tailwind' ? 'w-1/2' : 'w-50');
+            $this->demoTableWidthClass = ($this->demoTheme == 'tailwind' ? 'w-1/2' : 'w-50');
         }
         elseif ($value == 75)
         {
-            $this->tableWidthClass = ($this->theme == 'tailwind' ? 'w-3/4' : 'w-75');
+            $this->demoTableWidthClass = ($this->demoTheme == 'tailwind' ? 'w-3/4' : 'w-75');
         }
         else
         {
-            $this->tableWidthClass = ($this->theme == 'tailwind' ? 'w-full' : 'w-100');
+            $this->demoTableWidthClass = ($this->demoTheme == 'tailwind' ? 'w-full' : 'w-100');
         }
 
 

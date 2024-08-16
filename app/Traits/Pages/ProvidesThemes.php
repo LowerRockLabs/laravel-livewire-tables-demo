@@ -9,28 +9,28 @@ trait ProvidesThemes
     public string $originalTheme;
 
     #[Url(as: 'theme', keep: true)]
-    public string $theme = 'tw3';
+    public string $demoTheme = 'tw3';
 
     #[Url(as: 'tableTheme', keep: true)]
-    public string $tableTheme = 'tailwind';
+    public string $demoTableTheme = 'tailwind';
 
-    public function updatedTheme(string $theme)
+    public function updatedDemoTheme(string $demoTheme)
     {
-        $this->setTableTheme($theme);        
+        $this->setTableTheme($demoTheme);        
     }
 
-    public function setTableTheme(string $theme)
+    public function setTableTheme(string $demoTheme)
     {
-        $this->theme = $theme;
-        $this->tableTheme = "tailwind";
+        $this->demoTheme = $demoTheme;
+        $this->demoTableTheme = "tailwind";
 
-        if ($theme == "bs4")
+        if ($demoTheme == "bs4")
         {
-            $this->tableTheme = "bootstrap-4";
+            $this->demoTableTheme = "bootstrap-4";
         }
-        else if ($theme == "bs5")
+        else if ($demoTheme == "bs5")
         {
-            $this->tableTheme = "bootstrap-5";
+            $this->demoTableTheme = "bootstrap-5";
         }
     }
 

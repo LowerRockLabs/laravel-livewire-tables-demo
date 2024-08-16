@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\App;
 trait ProvidesLocales 
 {
     #[Url(as: 'chosenLocale', keep: true)]
-    public string $chosenLocale = 'en';
+    public string $demoChosenLocale = 'en';
 
     #[Locked]
-    public array $availableLocales = [];
+    public array $demoAvailableLocales = [];
 
-    public function updatedChosenLocale($val)
+    public function updatedDemoChosenLocale($val)
     {
         $this->checkAndUpdateChosenLocale($val);
     }

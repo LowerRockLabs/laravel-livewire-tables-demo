@@ -1,6 +1,6 @@
 <div style="margin-top: 2em;">
     @include('includes.sections.header.demoControls')
-    <div class="h-screen {{ $tableWidthClass ?? 'w-full' }}" wire:key="{{ $filterDemoKey }}-wrapper">
-        <livewire:dynamic-component :key="$filterDemoKey" :is="$selectedTable" theme="{{ $tableTheme }}"  />
+    <div class="h-screen {{ $demoTableWidthClass ?? 'w-full' }}" wire:key="{{ $demoFilterDemoKey }}-wrapper">
+        <livewire:dynamic-component :key="$demoFilterDemoKey" :is="$demoSelectedTable" theme="{{ $demoTableTheme }}"  />
     </div>
 </div>

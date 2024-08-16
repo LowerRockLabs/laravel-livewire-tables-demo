@@ -10,14 +10,14 @@ trait DemoTrait {
         ProvidesTableWidths,
         ProvidesThemes;
 
-    public $filterDemoKey = '';
+    public $demoFilterDemoKey = '';
 
     #[Url(as: 'selected-table', keep: true)]
-    public $selectedTable = 'news-table';
+    public $demoSelectedTable = 'news-table';
 
     public function setFilterDemoKey()
     {
-        $this->filterDemoKey = $this->selectedTable.'-'.$this->theme;
+        $this->demoFilterDemoKey = $this->demoSelectedTable.'-'.$this->demoTheme;
     }
 
     public function rendering()

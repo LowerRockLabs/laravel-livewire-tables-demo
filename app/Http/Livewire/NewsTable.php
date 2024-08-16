@@ -30,6 +30,8 @@ class NewsTable extends DataTableComponent
 
     public function configure(): void
     {
+        $this->useComputedPropertiesEnabled();
+
         $this->setPrimaryKey('id')
             ->setAdditionalSelects(['news.id as id'])
             ->setFilterLayout($this->filterLayout)
