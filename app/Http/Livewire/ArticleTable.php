@@ -161,14 +161,14 @@ class ArticleTable extends DataTableComponent
         return Article::with(['user:id,name']);
     }
 
-    public function bulkActions(): array
+   /* public function bulkActions(): array
     {
         return [
             'publish' => 'Publish',
             'unpublish' => 'Unpublish',
             'export' => 'Export',
         ];
-    }
+    }*/
 
     public function export()
     {
