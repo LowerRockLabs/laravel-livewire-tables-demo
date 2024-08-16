@@ -70,6 +70,8 @@ class ArticleTable extends DataTableComponent
             ->setHideBulkActionsWhenEmptyEnabled()
             ->setEagerLoadAllRelationsEnabled()
             ->setSearchDebounce(500);
+            $this->useComputedPropertiesEnabled();
+
     }
 
     public function columns(): array
