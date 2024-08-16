@@ -68,8 +68,7 @@ class ArticleTable extends DataTableComponent
             })
             ->setQueryStringAlias('article-table')
             ->setHideBulkActionsWhenEmptyEnabled()
-            ->setEagerLoadAllRelationsEnabled()
-            ->setSearchDebounce(500);
+            ->setEagerLoadAllRelationsEnabled();
             $this->useComputedPropertiesEnabled();
 
     }
